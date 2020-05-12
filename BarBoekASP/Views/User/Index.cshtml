@@ -1,0 +1,17 @@
+﻿@model UserListViewModel
+@{
+    ViewData["Title"] = "Gebruiker overzicht";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<a asp-action="Import">Importeer leden lijst</a>
+
+<ul>
+    @foreach (UserModel user in Model.Users)
+    {
+        <li class="row"> 
+            <span>@user.LastName, @user.Initials @user.Name @user.Insertion</span>
+        </li>
+    }
+</ul>

@@ -1,0 +1,17 @@
+﻿@model ImportUsersModel
+@{
+    ViewData["Title"] = "Import";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <input asp-for="File" type="File">
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Importeren">
+    </div>
+</form>
+
