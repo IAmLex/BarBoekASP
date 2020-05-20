@@ -9,16 +9,20 @@
     <div class="form-group">
         <label class="title">Selecteer het leden bestand</label>
         <input asp-for="File" type="File">
+
+        <span asp-validation-for="File" class="text-danger"></span>
     </div>
 
     <div class="form-group row ais">
-        <input type="checkbox" name="RemoveCurrent">
+        <input type="checkbox" id="RemoveCurrent" asp-for="RemoveCurrent">
         <label for="RemoveCurrent">Huidige leden verwijderen?</label>
     </div>
 
-
     <div class="form-group">
-        <label style="margin-bottom: 10px;" class="title">Link de database kolommen aan het excel bestand</label>
+        <div class="row sb">
+            <label style="margin-bottom: 10px;" class="title">Link de database kolommen aan het excel bestand</label>
+            <a class="btn" id="ReadFile">Bestand uitlezen</a>
+        </div>
         <div class="row sb">
             <div class="item" style="width: 30%;">
                 <div class="form-group">
@@ -106,3 +110,6 @@
     </div>
 </form>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
