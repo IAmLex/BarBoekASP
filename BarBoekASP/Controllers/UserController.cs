@@ -41,7 +41,7 @@ namespace BarBoekASP.Controllers
         }
 
         [HttpPost]
-        public IActionResult Import(IFormFile file)
+        public IActionResult Import(ImportUsersModel importUsersModel)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 

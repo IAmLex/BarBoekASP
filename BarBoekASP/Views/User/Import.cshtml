@@ -1,17 +1,108 @@
 ﻿@model ImportUsersModel
 @{
-    ViewData["Title"] = "Import";
+    ViewData["Title"] = "Importeer leden";
 }
 
 <h2>@ViewData["Title"]</h2>
 
 <form method="POST" enctype="multipart/form-data">
     <div class="form-group">
+        <label class="title">Selecteer het leden bestand</label>
         <input asp-for="File" type="File">
     </div>
 
+    <div class="form-group row ais">
+        <input type="checkbox" name="RemoveCurrent">
+        <label for="RemoveCurrent">Huidige leden verwijderen?</label>
+    </div>
+
+
     <div class="form-group">
-        <input type="submit" value="Importeren">
+        <label style="margin-bottom: 10px;" class="title">Link de database kolommen aan het excel bestand</label>
+        <div class="row sb">
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>[Database kolom]</label>
+                    <select name="" id="">
+                        <option value="">[Excel bestand kolom]</option>
+                    </select>
+                </div>
+            </div>
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>[Database kolom]</label>
+                    <select name="" id="">
+                        <option value="">[Excel bestand kolom]</option>
+                    </select>
+                </div>
+            </div>
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>[Database kolom]</label>
+                    <select name="" id="">
+                        <option value="">[Excel bestand kolom]</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row sb">
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>[Database kolom]</label>
+                    <select name="" id="">
+                        <option value="">[Excel bestand kolom]</option>
+                    </select>
+                </div>
+            </div>
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>[Database kolom]</label>
+                    <select name="" id="">
+                        <option value="">[Excel bestand kolom]</option>
+                    </select>
+                </div>
+            </div>
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>[Database kolom]</label>
+                    <select name="" id="">
+                        <option value="">[Excel bestand kolom]</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row sb">
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>[Database kolom]</label>
+                    <select name="" id="">
+                        <option value="">[Excel bestand kolom]</option>
+                    </select>
+                </div>
+            </div>
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>[Database kolom]</label>
+                    <select name="" id="">
+                        <option value="">[Excel bestand kolom]</option>
+                    </select>
+                </div>
+            </div>
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>[Database kolom]</label>
+                    <select name="" id="">
+                        <option value="">[Excel bestand kolom]</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Importeren" class="btn add">
     </div>
 </form>
 

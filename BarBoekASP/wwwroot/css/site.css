@@ -1,37 +1,386 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
-for details on configuring this project to bundle and minify static web assets. */
-body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿/*           */
+/* Add fonts */
+/*           */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/*              */
+/* Main styling */
+/*              */
+
+* {
+    margin: 0;
+    padding: 0;
+
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+h2 {
+    margin-bottom: 25px;
+    }
+
+p {
+    font-weight: 300;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
+li {
+    list-style: none;
+}
+
+.fg {
+    flex-grow: 1;
+}
+
+.sa {
+    justify-content: space-around;
+}
+
+.sb {
+    justify-content: space-between;
+}
+
+.ais {
+    align-items: center;
+}
+
+a {
+    color: #000;
+
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.price::before {
+    content: "€";
+}
+
+.hidden { 
+    display: none!important ;
+}
+
+section {
+    padding: 30px;
+    margin: 0 auto 25px;
+    
+    max-width: 1200px;
+    
+    border-radius: 25px;
+    background: #f3f3f3;
+}
+
+.select {
+    padding: 5px 5px 5px 10px;
+    margin-bottom: 5px;
+
+    background: white;
+    
+    border-radius: 5px;
+}
+
+.select:last-child {
+    margin-bottom: 0;
+}
+
+.select:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.select p {
+    display: flex;
+    align-items: center;;
+}
+
+/*                */
+/* Button styling */
+/*                */
+
+.btn {
+    display: inline-block;
+
+    padding:6px 15px;
+	color:#ffffff;
+    
+	background-color:#96c1e8;
+    
+    border: 0;
+	border-radius:4px;
+    font-size:15px;
+
+    width: fit-content;
+    height: fit-content;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color:#d5e6f6;
+}
+
+a.btn:hover {
+    text-decoration: none;
+}
+
+.btn:active {
+    position:relative;
+    top:1px;
+}
+
+.btn.add, input[type=submit].btn {
+    background: #64e764;
+}
+
+.btn.add:hover, input[type=submit].btn:hover {
+    background: #a6f1a6;
+}
+
+.btn.remove {
+    background: #ff4d4d;
+}
+
+.btn.remove:hover {
+    background: #ff9a9a;
+}
+
+.btn.edit {
+    background: #ffc04d;
+}
+
+.btn.edit:hover {
+    background: #ffdb9a;
+}
+
+/*                */
+/* Header styling */
+/*                */
+
+header {
+    padding: 15px 0;
+    margin-bottom: 25px;
+
+    background: #fff;
+    
+    border-bottom: 1px solid #eee;
+}
+/* 
+header li, header h1 {
+    margin: 0 10px;
+    padding: 10px;
+    background: #96c1e8;
+    border-radius: 100px;
+} */
+
+header h1 {
+    padding-right: 25px;
+}
+
+header li {
+    display: flex;
+    align-items: center;
+
+    padding-right: 10px;
+}
+
+/*               */
+/* Error styling */
+/*               */
+
+.text-danger span {
+    display: block;
+
+    margin: 10px 0;
+    padding: 10px;
+
+    border-radius: 3px;
+    color: #D8000C;
+    background-color: #FFBABA;
+
+    font-size: 13px;
+}
+
+/*                   */
+/* Book-item styling */
+/*                   */
+
+.book-items {
+    margin-bottom: 25px;
+
+    flex-wrap: wrap;
+}
+
+.book-items.small {
+    margin-bottom: 10px;
+}
+
+.book-item {
+    width: 250px;
+    height: 250px;
+    
+    margin: 25px 0;
+    text-align: center;
+    
+    position: relative;
+}
+
+.book-item:hover {
+    box-shadow: 5px 5px 5px rgb(102, 102, 102);
+    transform: scale(1.02);
+}
+
+.book-item.small {
+    width: 180px;
+    height: 180px;
+
+    margin: 15px 0;
+}
+
+.book-item span {
+    display: block;
+}
+
+.book-item .price {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    padding: 10px;
+    background: #fff;
+}
+
+.book-item .title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px 0;
+    background: rgba(255,255,255, .75);
     width: 100%;
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
+.book-item img {
+    width: 100%;
+    height: 100%;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+.book-item div.edit-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    width: 100%;
+    height: 100%;
+}
+
+/*              */
+/* Form styling */
+/*              */
+
+form label.title {
+    font-weight: bold;
+}
+
+.form-group {
+    display: flex; 
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+.form-group:last-of-type {
+    padding-bottom: 0;
+}
+
+.form-group input:not([type=submit]), select {
+    margin: 10px 0;
+    padding: 10px;
+
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+}
+
+input[type=checkbox] {
+    margin-right: 5px!important;
+}
+
+/*                      */
+/* Row / Column styling */
+/*                      */
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.row .btn {
+    margin-right: 5px;
+}
+
+.row .btn:last-child {
+    margin-right: 0;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+/*                */
+/* Pop-up styling */
+/*                */
+
+.pop-up {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 100;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(0,0,0, 0.8);
+
+    display: flex;
+}
+
+.pop-up .inner {
+    padding: 25px;
+    margin: auto;
+
+    width: fit-content;
+    max-width: 1000px;;
+
+    background: #fff;
+
+    border-radius: 15px;
+}
+
+.pop-up .row {
+    width: 100%;
+}
+
+.pop-up p {
+    margin-bottom: 25px;
+}
+
+/*                */
+/* Footer styling */
+/*                */
+
+footer {
+    border-top: 1px solid #eee;
+    margin-top: 25px;
+    padding-bottom: 7px;
+}
+
+footer p {
+    margin-top: 10px;
 }

@@ -3,9 +3,10 @@
     ViewData["Title"] = "Gebruiker overzicht";
 }
 
-<h2>@ViewData["Title"]</h2>
-
-<a asp-action="Import">Importeer leden lijst</a>
+<div class="row sb">
+    <h2>Importeren</h2>
+    <a asp-action="Import" class="btn add">Importeer leden</a>
+</div>
 
 <ul>
     @foreach (UserModel user in Model.Users)

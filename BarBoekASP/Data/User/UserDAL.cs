@@ -95,6 +95,8 @@ namespace BarBoekASP.Data
                 users.Add(temp);
             }
 
+            database.CloseConnection();
+
             return users;
         }
     }
