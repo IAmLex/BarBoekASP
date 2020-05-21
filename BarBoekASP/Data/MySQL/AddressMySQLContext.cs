@@ -1,4 +1,5 @@
-﻿using BarBoekASP.Models;
+﻿using BarBoekASP.Interfaces;
+using BarBoekASP.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BarBoekASP.Data.MySQL
 {
-    public class AddressMySQLContext : BaseMySQLContext//, iAddressRetrieveContext
+    public class AddressMySQLContext : BaseMySQLContext, iAddressRetrieveContext
     {
         public AddressMySQLContext(string connString) : base(connString)
         {
