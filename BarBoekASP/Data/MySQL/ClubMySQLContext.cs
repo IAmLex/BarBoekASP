@@ -52,5 +52,39 @@ namespace BarBoekASP.Data.MySQL
             }
             return c;
         }
+
+        public void InsertClub(ClubDTO club)
+        {
+            string sql = "INSERT INTO vereniging (ID,naam,AdresID,,email,wachtwoord,schemaID) VALUES(@ID,@name,@aID,@email,@passw,@sID);";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("ID", club.ID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("name", club.Name.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("aID", club.Address.ID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("email", club.Email.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("passw", club.Password.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("sID", club.Schedule.ID.ToString()));
+            DataSet result = ExecuteQuery(sql, parameters);
+        }
+
+        public void DeleteClub(int id)
+        {
+            string sql = "DELETE FROM vereniging where ID=@id;";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("id", id.ToString()));
+            ExecuteQuery(sql, parameters);
+        }
+
+        public void UpdateClub(ClubDTO club)
+        {
+            string sql = "UPDATE vereniging SET ID=@id, Naam=@name, adresID =@aID, email=@email, wachtwoord=@passw, schemaID=@sID; UPDATE [lid-dienst-combo] SET ID=@id";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("ID", club.ID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("name", club.Name.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("aID", club.Address.ID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("email", club.Email.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("passw", club.Password.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("sID", club.Schedule.ID.ToString()));
+            ExecuteQuery(sql, parameters);
+        }
     }
 }

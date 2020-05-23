@@ -50,5 +50,32 @@ namespace BarBoekASP.Data.MySQL
             }
             return p;
         }
+        public void InsertPayment(PaymentDTO pay)
+        {
+            string sql = "INSERT INTO betaling (ID,Lid_Dienst_ID,geslaagd) VALUES(@ID,@ldID,@complete);";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("ID", pay.ID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("ldID", pay.MemberShiftID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("complete", pay.Succesful.ToString()));
+            DataSet result = ExecuteQuery(sql, parameters);
+        }
+
+        public void DeleteMember(int id)
+        {
+            string sql = "DELETE FROM betaling where ID=@id;";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("id", id.ToString()));
+            ExecuteQuery(sql, parameters);
+        }
+
+        public void UpdatePayment(PaymentDTO pay)
+        {
+            string sql = "UPDATE betaling SET ID=@id, Lid_Dienst_ID = @ldID, geslaagd = @complete";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("ID", pay.ID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("ldID", pay.MemberShiftID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("complete", pay.Succesful.ToString()));
+            DataSet result = ExecuteQuery(sql, parameters);
+        }
     }
 }

@@ -50,5 +50,41 @@ namespace BarBoekASP.Data.MySQL
             }
             return m;
         }
+
+        public void InsertMember(MemberDTO mem)
+        {
+            string sql = "INSERT INTO leden (ID,naam,adresID,geboortedatum,email,wachtwoord,rechten) VALUES(@ID,@name,@aID,@bDate,@email,@passw,@rank);";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("ID", mem.ID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("name", mem.Name.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("aID", mem.Address.ID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("bDate", mem.BirthDate.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("email", mem.Email.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("passw", mem.Password.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("rank", mem.Access.ToString()));
+            DataSet result = ExecuteQuery(sql, parameters);
+        }
+
+        public void DeleteMember(int id)
+        {
+            string sql = "DELETE FROM [leden] where ID=@id; DELETE FROM [lid-dienst-combo] WHERE lidID=@id;";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("id", id.ToString()));
+            ExecuteQuery(sql, parameters);
+        }
+
+        public void UpdateMember(MemberDTO mem)
+        {
+            string sql = "UPDATE [leden] SET ID=@id, Naam=@name, adresID =@aID, geboortedatum=@bDate, email=@email, wachtwoord=@passw, rechten=@rank; UPDATE [lid-dienst-combo] SET ID=@id";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("ID", mem.ID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("name", mem.Name.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("aID", mem.Address.ID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("bDate", mem.BirthDate.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("email", mem.Email.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("passw", mem.Password.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("rank", mem.Access.ToString()));
+            ExecuteQuery(sql, parameters);
+        }
     }
 }

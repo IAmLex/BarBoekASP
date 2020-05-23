@@ -50,5 +50,36 @@ namespace BarBoekASP.Data.MySQL
             }
             return a;
         }
+
+        public void InsertAddress(AddressDTO addr)
+        {
+            string sql = "INSERT INTO adres (ID,zipcode,number,addition) VALUES(@ID,@zip,@num,@add);";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("ID", addr.ID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("zip", addr.ZipCode.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("num", addr.Number.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("add", addr.Addition.ToString()));
+
+            DataSet result = ExecuteQuery(sql, parameters);
+        }
+
+        public void DeleteAddress(int id)
+        {
+            string sql = "DELETE FROM adres where ID=@id;";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("id", id.ToString()));
+            ExecuteQuery(sql, parameters);
+        }
+
+        public void UpdateAddress(AddressDTO addr)
+        {
+            string sql = "UPDATE adres SET ID=@id, zipcode=@zip, number=@num, addition=@add";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("ID", addr.ID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("zip", addr.ZipCode.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("num", addr.Number.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("add", addr.Addition.ToString()));
+            ExecuteQuery(sql, parameters);
+        }
     }
 }

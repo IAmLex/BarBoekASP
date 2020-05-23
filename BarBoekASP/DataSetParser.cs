@@ -57,7 +57,8 @@ namespace BarBoekASP
             return new PaymentDTO()
             {
                 ID = (int)set.Tables[0].Rows[rowIndex][0],
-                Succesful = (bool)set.Tables[0].Rows[rowIndex][1]
+                MemberShiftID = (int)set.Tables[0].Rows[rowIndex][1],
+                Succesful = (bool)set.Tables[0].Rows[rowIndex][2]
             };
         }
 
