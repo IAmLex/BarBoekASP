@@ -5,13 +5,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BarBoekASP.Models;
+using BarBoekASP.Data.Repositories;
+using BarBoekASP.Interfaces;
+using BarBoekASP.Data.MySQL;
+using Microsoft.Extensions.Configuration;
 
 namespace BarBoekASP.Controllers
 {
     public class HomeController : Controller
     {
+        iAddressRetrieveContext iAddressRetrieveContext;
+        AddressRetRepository addressRetrieveRepository;
+
+        public HomeController(IConfiguration configuration)
+        {
+            iAddressRetrieveContext = new AddressMySQLContext(configuration.GetConnectionString("DefaultConnection"));
+
+            addressRetrieveRepository = new AddressRetRepository(iAddressRetrieveContext);
+        }
+
         public IActionResult Index()
         {
+            addressRetrieveRepository.GetAll();
+
             return View();
         }
 

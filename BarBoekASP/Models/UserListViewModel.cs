@@ -6,6 +6,6 @@ namespace BarBoekASP.Models
 {
     public class UserListViewModel
     {
-        public List<UserModel> Users { get; set; }
+        public List<UserModel> Users { get; set; } = new List<UserModel>();
     }
 }

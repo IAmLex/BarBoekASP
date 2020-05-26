@@ -31,6 +31,7 @@ namespace BarBoekASP.Models
         public List<PaymentDTO> Payments { get; set; }
         //public List<UnavailableDTO> Unavailable {get;set;}
         public List<ShiftDTO> PrefferedShifts { get; set; }
-        public AccessLevel Access {get; set;}
+        public AccessLevel Access { get; set; }
+        public int clubID { get; set; }
     }
 }

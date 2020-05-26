@@ -8,18 +8,38 @@ using BarBoekASP.Models;
 using System.IO;
 using OfficeOpenXml;
 using System.Text;
-using BarBoekASP.Logic;
+
+using BarBoekASP.Interfaces;
+using BarBoekASP.Data.Repositories;
+using BarBoekASP.Data.MySQL;
+using Microsoft.Extensions.Configuration;
 
 namespace BarBoekASP.Controllers
 {
     public class UserController : Controller
     {
+        private iMemberRetrieveContext _iMemberRetrieveContext;
+        private MemberRetRepository _memberRetRepository;
+        private iMemberSaveContext _iMemberSaveContext;
+        private MemberSaveRepository _memberSaveRepository;
+
+        public UserController (IConfiguration configuration) 
+        {
+            string connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            _iMemberRetrieveContext = new MemberMySQLContext(connectionString);
+            _memberRetRepository = new MemberRetRepository(_iMemberRetrieveContext);
+
+            _iMemberSaveContext = new MemberMySQLContext(connectionString);
+            _memberSaveRepository = new MemberSaveRepository(_iMemberSaveContext);
+        }
+
         public IActionResult Index()
         {
             // TODO: Return all users in the database.
             UserListViewModel userListViewModel = new UserListViewModel();
-            userListViewModel.Users = new List<UserModel>();
-            foreach (User user in UserContainer.GetAllUsers())
+
+            foreach (MemberDTO user in _memberRetRepository.GetAll())
             {
                 UserModel temp = new UserModel();
 
@@ -46,9 +66,12 @@ namespace BarBoekASP.Controllers
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             if (importUsersModel.RemoveCurrent)
-                UserContainer.RemoveAll();
+            {
+                // TODO: Get club id from session data when login is implemented.
+                this._memberSaveRepository.RemoveAllMembers(0);
+            }
 
-            // Verify is file is excel
+            // TODO: Verify is file is excel
 
             using(ExcelPackage package = new ExcelPackage(importUsersModel.File.OpenReadStream()))
             {
@@ -60,28 +83,33 @@ namespace BarBoekASP.Controllers
                     if (worksheet.Cells[$"B{count}"].Text == "")
                         break;
 
-                    User user = new User();
+                    MemberDTO member = new MemberDTO();
+                    member.Address = new AddressDTO();
 
-                    user.BondNumber = int.Parse(worksheet.Cells[$"A{count}"].Text);
-                    user.LastName = worksheet.Cells[$"B{count}"].Text;
-                    user.Initials = worksheet.Cells[$"C{count}"].Text;
-                    user.Insertion = worksheet.Cells[$"D{count}"].Text;
-                    user.Name = worksheet.Cells[$"E{count}"].Text;
-                    user.Street = worksheet.Cells[$"F{count}"].Text;
-                    user.HouseNumber = int.Parse(worksheet.Cells[$"G{count}"].Text);                
-                    user.Addition = worksheet.Cells[$"H{count}"].Text;
-                    user.ZipCode = worksheet.Cells[$"I{count}"].Text;
-                    user.Residence = worksheet.Cells[$"J{count}"].Text;
-                    user.Country = worksheet.Cells[$"K{count}"].Text;
-                    user.PhoneNumber = worksheet.Cells[$"L{count}"].Text;
-                    user.Gender = worksheet.Cells[$"M{count}"].Text;
-                    user.BirthDate = DateTime.Parse(worksheet.Cells[$"N{count}"].Text);
-                    user.VerenigingsNummer = int.Parse(worksheet.Cells[$"O{count}"].Text);
-                    user.Email = worksheet.Cells[$"P{count}"].Text;
-                    user.PhoneWork = worksheet.Cells[$"Q{count}"].Text;
-                    user.PhoneMobile = worksheet.Cells[$"R{count}"].Text;
+                    member.BondNummer = int.Parse(worksheet.Cells[$"A{count}"].Text);
+                    member.LastName = worksheet.Cells[$"B{count}"].Text;
+                    member.Initials = worksheet.Cells[$"C{count}"].Text;
+                    member.Insertion = worksheet.Cells[$"D{count}"].Text;
+                    member.Name = worksheet.Cells[$"E{count}"].Text;
 
-                    UserContainer.Save(user);
+                    member.Address = new AddressDTO()
+                    {
+                        Street = worksheet.Cells[$"F{count}"].Text,
+                        Number = Int32.Parse(worksheet.Cells[$"G{count}"].Text),                
+                        Addition = worksheet.Cells[$"H{count}"].Text,
+                        ZipCode = worksheet.Cells[$"I{count}"].Text,
+                        Residence = worksheet.Cells[$"J{count}"].Text,
+                        Country = worksheet.Cells[$"K{count}"].Text
+                    };
+
+                    member.PhoneNumber = worksheet.Cells[$"L{count}"].Text;
+                    member.Gender = worksheet.Cells[$"M{count}"].Text;
+                    member.BirthDate = DateTime.Parse(worksheet.Cells[$"N{count}"].Text);
+                    member.Email = worksheet.Cells[$"P{count}"].Text;
+                    member.PhoneWork = worksheet.Cells[$"Q{count}"].Text;
+                    member.PhoneMobile = worksheet.Cells[$"R{count}"].Text;
+
+                    this._memberSaveRepository.InsertMember(member);
 
                     count++;
                 }

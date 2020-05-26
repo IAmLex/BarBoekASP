@@ -30,27 +30,27 @@ namespace BarBoekASP.Data
 
         public UserDTO() { }
 
-        public UserDTO(User user) 
-        {
-            this.Id = user.Id;
-            this.BondNumber = user.BondNumber;
-            this.LastName = user.LastName;
-            this.Initials = user.Initials;
-            this.Insertion = user.Insertion;
-            this.Name = user.Name;
-            this.Street = user.Street;
-            this.HouseNumber = user.HouseNumber;
-            this.Addition = user.Addition;
-            this.ZipCode = user.ZipCode;
-            this.Residence = user.Residence;
-            this.Country = user.Country;
-            this.PhoneNumber = user.PhoneNumber;
-            this.Gender = user.Gender;
-            this.BirthDate = user.BirthDate;
-            this.VerenigingsNummer = user.VerenigingsNummer;
-            this.Email = user.Email;
-            this.PhoneWork = user.PhoneWork;
-            this.PhoneMobile = user.PhoneMobile;
-        }
+        // public UserDTO(User user) 
+        // {
+        //     this.Id = user.Id;
+        //     this.BondNumber = user.BondNumber;
+        //     this.LastName = user.LastName;
+        //     this.Initials = user.Initials;
+        //     this.Insertion = user.Insertion;
+        //     this.Name = user.Name;
+        //     this.Street = user.Street;
+        //     this.HouseNumber = user.HouseNumber;
+        //     this.Addition = user.Addition;
+        //     this.ZipCode = user.ZipCode;
+        //     this.Residence = user.Residence;
+        //     this.Country = user.Country;
+        //     this.PhoneNumber = user.PhoneNumber;
+        //     this.Gender = user.Gender;
+        //     this.BirthDate = user.BirthDate;
+        //     this.VerenigingsNummer = user.VerenigingsNummer;
+        //     this.Email = user.Email;
+        //     this.PhoneWork = user.PhoneWork;
+        //     this.PhoneMobile = user.PhoneMobile;
+        // }
     }
 }

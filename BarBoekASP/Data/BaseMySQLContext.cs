@@ -27,7 +27,7 @@ namespace BarBoekASP.Data.MySQL
                 {
                     MySqlParameter para = new MySqlParameter();
                     para.ParameterName = "@" + kvp.Key;
-                    para.Value = "@" + kvp.Value;
+                    para.Value = kvp.Value;
                     cmd.Parameters.Add(para);
                 }
                 cmd.CommandText = query;
