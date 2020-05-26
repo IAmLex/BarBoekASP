@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Q0uHPes4L/PfkhGAA4nzyQHFf240ii5+RsNOaGN2b1EON53YrpsKz9pIsSzHZ0xsixQcKhCSXrFnScyRjKBnhg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\omen\\OneDrive\\Fontys\\Software\\S2\\MWProjects - Barboek\\Code\\ClassLibBarboek\\ClassLibBarboek.csproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
