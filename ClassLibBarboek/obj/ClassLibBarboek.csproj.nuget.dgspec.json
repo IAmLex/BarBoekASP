@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\omen\\OneDrive\\Fontys\\Software\\S2\\MWProjects - Barboek\\Code\\ClassLibBarboek\\ClassLibBarboek.csproj": {}
+    "C:\\Users\\omen\\Documents\\GitHub\\BarBoekASP\\ClassLibBarboek\\ClassLibBarboek.csproj": {}
   },
   "projects": {
-    "C:\\Users\\omen\\OneDrive\\Fontys\\Software\\S2\\MWProjects - Barboek\\Code\\ClassLibBarboek\\ClassLibBarboek.csproj": {
+    "C:\\Users\\omen\\Documents\\GitHub\\BarBoekASP\\ClassLibBarboek\\ClassLibBarboek.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\omen\\OneDrive\\Fontys\\Software\\S2\\MWProjects - Barboek\\Code\\ClassLibBarboek\\ClassLibBarboek.csproj",
+        "projectUniqueName": "C:\\Users\\omen\\Documents\\GitHub\\BarBoekASP\\ClassLibBarboek\\ClassLibBarboek.csproj",
         "projectName": "ClassLibBarboek",
-        "projectPath": "C:\\Users\\omen\\OneDrive\\Fontys\\Software\\S2\\MWProjects - Barboek\\Code\\ClassLibBarboek\\ClassLibBarboek.csproj",
+        "projectPath": "C:\\Users\\omen\\Documents\\GitHub\\BarBoekASP\\ClassLibBarboek\\ClassLibBarboek.csproj",
         "packagesPath": "C:\\Users\\omen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\omen\\OneDrive\\Fontys\\Software\\S2\\MWProjects - Barboek\\Code\\ClassLibBarboek\\obj\\",
+        "outputPath": "C:\\Users\\omen\\Documents\\GitHub\\BarBoekASP\\ClassLibBarboek\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
