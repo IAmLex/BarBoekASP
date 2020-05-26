@@ -45,9 +45,12 @@ namespace BarBoekASP.Controllers
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-            // TODO: Use external file or upload file to server
-            // using(ExcelPackage package = new ExcelPackage(new FileInfo(importUsersModel.File.FileName)))
-            using(ExcelPackage package = new ExcelPackage(new FileInfo("leden.xlsx")))
+            if (importUsersModel.RemoveCurrent)
+                UserContainer.RemoveAll();
+
+            // Verify is file is excel
+
+            using(ExcelPackage package = new ExcelPackage(importUsersModel.File.OpenReadStream()))
             {
                 ExcelWorksheet worksheet = package.Workbook.Worksheets["Sheet1"];
 

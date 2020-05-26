@@ -22,5 +22,10 @@ namespace BarBoekASP.Logic
         {
             return UserDAL.Save(new UserDTO(user));
         }
+
+        public static bool RemoveAll()
+        {
+            return UserDAL.RemoveAll();
+        }
     }
 }

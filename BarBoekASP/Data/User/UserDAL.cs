@@ -99,5 +99,21 @@ namespace BarBoekASP.Data
 
             return users;
         }
+
+        public static bool RemoveAll()
+        {
+            Database database = new Database();
+
+            if (!database.OpenConnection())
+                return false;
+
+            database.command.CommandText = "DELETE FROM users";
+
+            int affectedRows = database.command.ExecuteNonQuery();
+
+            if (affectedRows > 0)
+                return true;
+            return false;
+        }
     }
 }
