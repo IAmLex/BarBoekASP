@@ -47,7 +47,20 @@ namespace BarBoekASP
             {
                 ID = (int)set.Tables[0].Rows[rowIndex][0],
                 Name = set.Tables[0].Rows[rowIndex][1].ToString(),
-                Address = (AddressDTO)a.FindAddressById((int)set.Tables[0].Rows[rowIndex][2])
+                Address = (AddressDTO)a.FindAddressById((int)set.Tables[0].Rows[rowIndex][2]),
+                BirthDate = (DateTime)set.Tables[0].Rows[rowIndex][3],
+                Email = set.Tables[0].Rows[rowIndex][4].ToString(),
+                Password = set.Tables[0].Rows[rowIndex][5].ToString(),
+                Access = (MemberDTO.AccessLevel)set.Tables[0].Rows[rowIndex][6],
+                BondNummer = (int)set.Tables[0].Rows[rowIndex][7],
+                LastName = set.Tables[0].Rows[rowIndex][8].ToString(),
+                Initials = set.Tables[0].Rows[rowIndex][9].ToString(),
+                Insertion = set.Tables[0].Rows[rowIndex][10].ToString(),
+                PhoneNumber = set.Tables[0].Rows[rowIndex][9].ToString(),
+                Gender = set.Tables[0].Rows[rowIndex][10].ToString(),
+                PhoneWork = set.Tables[0].Rows[rowIndex][11].ToString(),
+                PhoneMobile = set.Tables[0].Rows[rowIndex][12].ToString()
+
 
             };
         }

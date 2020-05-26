@@ -14,16 +14,16 @@ namespace BarBoekASP.Models
             Super
         }
         public int ID { get; set; }
-        public int BondNummer { get; set; } //ADD TO PARSER
-        public string LastName { get; set; } //ADD TO PARSER
-        public string Initials { get; set; } //ADD TO PARSER
-        public string Insertion { get; set; } //ADD TO PARSER
+        public int BondNummer { get; set; }
+        public string LastName { get; set; }
+        public string Initials { get; set; }
+        public string Insertion { get; set; }
         public string Name { get; set; }
-        public string PhoneNumber { get; set; } //ADD TO PARSER
-        public string Gender { get; set; } //ADD TO PARSER
-        public int VerenigingsNumber { get; set; } //ADD TO PARSER
-        public int PhoneWork { get; set; } //ADD TO PARSER
-        public int PhoneMobile { get; set; } //ADD TO PARSER
+        public string PhoneNumber { get; set; }
+        public string Gender { get; set; }
+        public int ClubNumber { get; set; }
+        public string PhoneWork { get; set; }
+        public string PhoneMobile { get; set; }
         public AddressDTO Address { get; set; }
         public DateTime BirthDate { get; set; }
         public string Email { get; set; }
