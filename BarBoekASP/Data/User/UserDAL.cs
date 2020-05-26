@@ -58,11 +58,11 @@ namespace BarBoekASP.Data
             
             if (limit == -1) 
             {
-                database.command.CommandText = "SELECT * FROM users WHERE deleted_at IS NULL";
+                database.command.CommandText = "SELECT * FROM leden WHERE deleted_at IS NULL";
             } 
             else 
             {
-                database.command.CommandText = "SELECT * FROM users WHERE deleted_at IS NULL LIMIT @limit";
+                database.command.CommandText = "SELECT * FROM leden WHERE deleted_at IS NULL LIMIT @limit";
 
                 database.command.Parameters.AddWithValue("limit", limit);
             }

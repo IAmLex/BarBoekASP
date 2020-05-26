@@ -19,10 +19,10 @@ namespace BarBoekASP.Data
         public Database()
         {
             // TODO: Put in config.
-            this.server = "localhost";
-            this.username = "root";
-            this.password = "";
-            this.database = "barboek";
+            this.server = "84.31.134.4";
+            this.username = "newuser";
+            this.password = "test";
+            this.database = "barboekmain";
         }
 
         public bool OpenConnection()
