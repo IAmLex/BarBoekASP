@@ -18,7 +18,7 @@ namespace BarBoekASP.Data.MySQL
 
         public List<ScheduleDTO> GetAllSchedules()
         {
-            string query = "Select * from schema";
+            string query = "Select * from `schema` ";
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
             DataSet results = ExecuteQuery(query, parameters);
 
@@ -38,7 +38,7 @@ namespace BarBoekASP.Data.MySQL
 
         public ScheduleDTO FindScheduleById(int id)
         {
-            string query = "Select * from schema where id=@id";
+            string query = "Select * from `schema` where id=@id";
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
             parameters.Add(new KeyValuePair<string, string>("id", id.ToString()));
 
