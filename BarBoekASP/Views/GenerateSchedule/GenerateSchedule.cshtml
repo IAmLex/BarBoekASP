@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Rooster";
+}
+
+<div>
+    <div class="row">
+        <div class="col-4">
+            <div>
+                <h1>Rooster genereren</h1>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-5">
+                    <select class="form-control" id="selectmonth">
+                        <option>April</option>
+                    </select>
+                </div>
+                <div class="col-4">
+                    <button class="btn" type="button" id="generateButton">
+                        Genereren
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!--legenda komt hier-->
+        <div class="col-5">
+            <ul class="list-inline" id="listlegend">
+                <li id="blockcolorred">item 1--------------------------</li>
+                <li id="blockcolorgreen">item 2--------------------------</li>
+                <li id="blockcolorblue">item 3--------------------------</li>
+                <li id="blockcolorpurple">item 4--------------------------</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <table class="table table-bordered table-hover col-9">
+        <thead>
+            <tr>
+                <th scope="col">Evenement</th>
+                <th scope="col">Datum</th>
+                <th scope="col">Begin Tijd</th>
+                <th scope="col">Eind Tijd</th>
+                <th scope="col">Lid</th>
+                <th scope="col">Bewerken</th>
+                <th scope="col">Verwijderen</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ShiftViewModel shift in Model.Shifts)
+            {
+                
+                <tr>
+                   
+
+                        <th></th>
+                        <td> @shift.StartMoment.Date</td>
+                        <td>@shift.StartMoment.TimeOfDay</td>
+                        <td>@shift.EndMoment.TimeOfDay</td>
+                        <td></td>
+                        <td><input id="edit" class="btn" type="submit" value="Bewerk"></td>
+                        <td><input id="edit" class="btn" type="submit" value="Verwijder"></td>
+                    
+                    <!--
+            <th></th>
+            <td>27-5-2020</td>
+            <td>10:00</td>
+            <td>11:00</td>
+            <td></td>
+            <td><input id="edit" class="btn" type="submit" value="Bewerk"></td>
+            <td><input id="edit" class="btn" type="submit" value="Verwijder"></td>
+            -->
+                </tr>
+            }
+            </tbody>
+    </table>
+</div>

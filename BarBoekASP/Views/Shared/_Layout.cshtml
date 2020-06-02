@@ -6,24 +6,28 @@
     <title>@ViewData["Title"] - BarBoekASP</title>
 
     <environment include="Development">
-        @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" /> *@
+        @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" href="~/css/site.css" />
+        @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">*@
     </environment>
-    <environment exclude="Development">
-        @* <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" /> *@
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+<environment exclude="Development">
+    @* <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+        asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" /> *@
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</environment>
 </head>
 <body>
     <header>
         <div class="container row">
             <h1>BarBoek.nl</h1>
-                <ul class="row fg sb">
-                    <li><a asp-area="" asp-controller="User" asp-action="Index">Home</a></li>
-                </ul>
-            </div>
+            <ul class="row fg sb">
+                <li><a asp-area="" asp-controller="User" asp-action="Index">Home</a></li>
+            </ul>
+            <ul class="row fg sb">
+                <li><a asp-area="" asp-controller="GenerateSchedule" asp-action="GenerateSchedule">Rooster Genereren</a></li>
+            </ul>
         </div>
     </header>
 

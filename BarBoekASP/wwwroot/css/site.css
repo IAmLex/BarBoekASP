@@ -327,6 +327,7 @@ input[type=checkbox] {
     margin-right: 0;
 }
 
+
 .col {
     display: flex;
     flex-direction: column;
@@ -384,3 +385,74 @@ footer {
 footer p {
     margin-top: 10px;
 }
+
+
+/*Generate Schedule page css-------------------------------------------------------------------------------*/
+#PageMargin {
+    margin-left: 15px;
+}
+
+#generateButton {
+    background-color: #80ffaa;
+}
+
+#selectmonth {
+    border-style: solid;
+    border-color: lightgray;
+}
+
+h1 {
+    color: #666666;
+}
+
+
+#listlegend li {
+    font-size: 14px;
+    background: lightgray;
+    margin-top: 10px;
+}
+
+#blockcolorred::before {
+    background: white;
+    content: "■";
+    color: red;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+#blockcolorgreen::before {
+    background: white;
+    content: "■";
+    color: green;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+#blockcolorpurple::before {
+    background: white;
+    content: "■";
+    color: purple;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+#blockcolorblue::before {
+    background: white;
+    content: "■";
+    color: blue;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+#edit {
+    background-color: rgb(54, 215, 243);
+}
+/*---------------------------------------------------------------------------------------------------------*/

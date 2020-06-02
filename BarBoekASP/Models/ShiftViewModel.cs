@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BarBoekASP.Models
 {
-    public struct ShiftDTO
+    public class ShiftViewModel
     {
         public enum Soort
         {
@@ -22,7 +22,5 @@ namespace BarBoekASP.Models
         public Soort EventType { get; set; }
         public int MaxMemberCount { get; set; }
         public /*List<*/MemberDTO/*>*/ Members { get; set; }
-
     }
-
 }
