@@ -14,6 +14,7 @@ namespace BarBoekASP.Data.Repositories
         public MemberSaveRepository(iMemberSaveContext saveContext)
         {
             SaveContext = saveContext;
+           
         }
 
         public void InsertMember(MemberDTO member) 
@@ -25,5 +26,10 @@ namespace BarBoekASP.Data.Repositories
         {
             SaveContext.RemoveAllMembers(clubId);
         }
+
+
+
+
+       
     }
 }

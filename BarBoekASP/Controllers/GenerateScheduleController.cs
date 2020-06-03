@@ -14,6 +14,9 @@ namespace BarBoekASP.Controllers
     public class GenerateScheduleController : Controller
     {
         ScheduleSaveRepository scheduleSaveRepository;
+        iScheduleSaveContext _ischeduldeSaveContext;
+        ShiftSaveRepository shiftSaveRepository;
+        iShiftSaveContext _ishiftSaveContext;
 
         iShiftRetrieveContext _iShiftRetrieveContext;
         ShiftRetRepository shiftRetRepository;
@@ -28,8 +31,13 @@ namespace BarBoekASP.Controllers
             shiftRetRepository = new ShiftRetRepository(_iShiftRetrieveContext);
 
             _iMemberRetrieveContext = new MemberMySQLContext(connectionString);
-
             memberRetRepository = new MemberRetRepository(_iMemberRetrieveContext);
+
+            _ischeduldeSaveContext = new ScheduleMySQLContext(connectionString);
+            scheduleSaveRepository = new ScheduleSaveRepository(_ischeduldeSaveContext);
+
+            _ishiftSaveContext = new ShiftMySQLContext(connectionString);
+            shiftSaveRepository = new ShiftSaveRepository(_ishiftSaveContext);
         }
 
         public IActionResult Index()
@@ -37,29 +45,67 @@ namespace BarBoekASP.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult GenerateSchedule()
         {
+           
+            return View(new ShiftViewModel());
+        }
 
+        [HttpPost]
+        public IActionResult GenerateSchedule(string month)
+        {
             List<MemberDTO> members = memberRetRepository.GetAll();
             List<ShiftDTO> shifts = shiftRetRepository.GetAll();
 
-            ShiftDetailViewModel shiftDetailViewModel = new ShiftDetailViewModel();
-            /*
+            ShiftViewModel shiftViewModel = new ShiftViewModel();
+
             foreach (ShiftDTO shift in shifts)
             {
                 scheduleSaveRepository.Shifts.Add(shift);
             }
-            */
-            foreach (ShiftDTO shift in shifts)
+            scheduleSaveRepository.PlanShifts(members);
+            foreach (ShiftDTO shift in scheduleSaveRepository.Shifts)
             {
-                ShiftViewModel model = new ShiftViewModel();
+                if (shift.StartMoment.Month.ToString() == month)
+                {
+                    shiftSaveRepository.SaveLidShift(shift);
+                    ShiftDetailViewModel model = new ShiftDetailViewModel();
 
-                model.EndMoment = shift.EndMoment;
-                model.StartMoment = shift.StartMoment;
+                    model.EndMoment = shift.EndMoment;
+                    model.StartMoment = shift.StartMoment;
+                    model.Members = shift.Members;
+                    model.ID = shift.ID;
 
-                shiftDetailViewModel.Shifts.Add(model);
+                    shiftViewModel.Shifts.Add(model);
+                }
             }
-            return View(shiftDetailViewModel);
+
+            return View(shiftViewModel);
+        }
+
+        [HttpDelete]
+        public IActionResult GenerateSchedule(int Delete)
+        {
+
+            return View(new ShiftViewModel());
+        }
+        /*
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            // Get current shift by ID
+
+            return View(shift);
+        }
+        */
+        [HttpPost]
+        public IActionResult Edit(ShiftViewModel shiftViewModel)
+        {
+            // Create dto from model
+            // Save model to database
+
+            return RedirectToAction("GenerateSchedule");
         }
     }
 }

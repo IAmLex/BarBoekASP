@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BarBoekASP.Data.MySQL
 {
-    public class ScheduleMySQLContext : BaseMySQLContext, iScheduleRetrieveContext
+    public class ScheduleMySQLContext : BaseMySQLContext, iScheduleRetrieveContext, iScheduleSaveContext
     {
         public ScheduleMySQLContext(string connString) : base(connString)
         {
