@@ -1,14 +1,16 @@
 ﻿using BarBoekASP.Interfaces;
 using BarBoekASP.Models;
+using Org.BouncyCastle.Asn1.Mozilla;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 
 namespace BarBoekASP.Data.MySQL
 {
-    public class ShiftMySQLContext : BaseMySQLContext, iShiftRetrieveContext
+    public class ShiftMySQLContext : BaseMySQLContext, iShiftRetrieveContext, iShiftSaveContext
     {
         public ShiftMySQLContext(string connString) : base(connString)
         {
@@ -52,15 +54,44 @@ namespace BarBoekASP.Data.MySQL
         }
         public void InsertShift(ShiftDTO shift)
         {
-            string sql = "INSERT INTO dienst (ID,naam,startMoment,eindMoment,soort,maxLeden) VALUES(@ID,@name,@sMom,@eMom,@type,@maxMem);";
+            string sql = "INSERT INTO dienst (naam,startMoment,eindMoment,soort,maxLeden) VALUES(@name,@sMom,@eMom,@type,@maxMem);";
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
-            parameters.Add(new KeyValuePair<string, string>("ID", shift.ID.ToString()));
             parameters.Add(new KeyValuePair<string, string>("name", shift.Name.ToString()));
             parameters.Add(new KeyValuePair<string, string>("sMom", shift.StartMoment.ToString()));
             parameters.Add(new KeyValuePair<string, string>("eMom", shift.EndMoment.ToString()));
             parameters.Add(new KeyValuePair<string, string>("type", shift.EventType.ToString()));
             parameters.Add(new KeyValuePair<string, string>("maxMem", shift.MaxMemberCount.ToString()));
             DataSet result = ExecuteQuery(sql, parameters);
+        }
+
+        public void DeleteShift(int id)
+        {
+            string sql = "delete from dienst where ID=@id";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("id", id.ToString()));
+
+            ExecuteQuery(sql, parameters);
+        }
+        public void UpdateShift(ShiftDTO shift)
+        {
+            string sql = "update dienst set StartMoment=@startmoment EindMoment=@eindmoment Soort=@soort where ID=@id ";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("id", shift.ID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("startmoment", shift.StartMoment.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("eindmoment", shift.EndMoment.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("soort", shift.EventType.ToString()));
+
+            ExecuteQuery(sql, parameters);
+        }
+        public void InsertLidShift(ShiftDTO shift)
+        {
+            string sql = "INSERT INTO `lid-dienst-combo` (lidID, dienstID) VALUES(@lidid, @dienstid);";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("lidid", shift.Members.ID.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("dienstid", shift.ID.ToString()));
+           
+
+            ExecuteQuery(sql, parameters);
         }
 
         public void DeleteSchedule(int id)

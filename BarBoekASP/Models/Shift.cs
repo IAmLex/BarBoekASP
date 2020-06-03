@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BarBoekASP.Models
 {
-    public struct ShiftDTO
+    public class ShiftDTO
     {
         public enum Soort
         {

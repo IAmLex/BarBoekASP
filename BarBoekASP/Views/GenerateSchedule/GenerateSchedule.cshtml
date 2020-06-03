@@ -10,16 +10,26 @@
             </div>
             <br>
             <div class="row">
-                <div class="col-5">
-                    <select class="form-control" id="selectmonth">
-                        <option>April</option>
+                <form method="post">
+                    <select id="selectmonth" name="month">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">Maart</option>
+                        <option value="4">April</option>
+                        <option value="5">Mei</option>
+                        <option value="6">Juni</option>
+                        <option value="7">Juli</option>
+                        <option value="8">Augustus</option>
+                        <option value="9">September</option>
+                        <option value="10">Oktober</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
                     </select>
-                </div>
-                <div class="col-4">
-                    <button class="btn" type="button" id="generateButton">
+                    <input type="submit" class="btn" value="Genereren"/>
+                    @*<button class="btn" type="button" id="generateButton" OnClick="GenerateBtnClick">
                         Genereren
-                    </button>
-                </div>
+                    </button>*@
+                </form>
             </div>
         </div>
         <!--legenda komt hier-->
@@ -47,19 +57,17 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (ShiftViewModel shift in Model.Shifts)
+            @foreach (ShiftDetailViewModel shift in Model.Shifts)
             {
-                
                 <tr>
-                   
-
-                        <th></th>
+                        <th>@shift.EventType</th>
                         <td> @shift.StartMoment.Date</td>
                         <td>@shift.StartMoment.TimeOfDay</td>
                         <td>@shift.EndMoment.TimeOfDay</td>
-                        <td></td>
-                        <td><input id="edit" class="btn" type="submit" value="Bewerk"></td>
-                        <td><input id="edit" class="btn" type="submit" value="Verwijder"></td>
+                        <td>@shift.Members.Name</td>
+                        <td><a asp-controller="GenerateScheduleController" asp-action="Edit" asp-route-id="@shift.ID" id="edit" class="btn">Edit</a></td>
+                        @*<td><input id="edit" class="btn" type="submit" value="Bewerk" name="Edit"></td>*@
+                        <td><input id="edit" class="btn" type="submit" value="Verwijder" name="Delete" formmethod="delete"></td>
                     
                     <!--
             <th></th>
