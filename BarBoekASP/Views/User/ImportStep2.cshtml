@@ -1,0 +1,260 @@
+@model ImportUsersModel
+@{
+    ViewData["Title"] = "Importeer leden";
+    char c;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="POST" asp-action="ImportStep2" enctype="multipart/form-data">
+    <div class="form-group">
+        <div class="row sb">
+            <label style="margin-bottom: 10px;" class="title">Bestand niet herkend, link handmatig de kolommen aan de database</label>
+        </div>
+        <div class="row sb">
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>Bondsnummer</label>
+                    <select asp-for="Bondsnr">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>Achternaam</label>
+                    <select asp-for="Achternaam">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>Voorletters</label>
+                    <select asp-for="Voorletters">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>Tussenvoegsel</label>
+                    <select asp-for="Tussenvoegsel">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>Roepnaam</label>
+                    <select asp-for="Roepnaam">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>Straat</label>
+                    <select asp-for="Straat">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>Huisnr</label>
+                    <select asp-for="Huisnr">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>Toevoeging</label>
+                    <select asp-for="Toevoeging">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>Postcode</label>
+                    <select asp-for="Postcode">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>Woonplaats</label>
+                    <select asp-for="Woonplaats">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>Land</label>
+                    <select asp-for="Land">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>Land</label>
+                    <select asp-for="Land">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>Telefoon</label>
+                    <select asp-for="Telefoon">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>ManVrouw</label>
+                    <select asp-for="ManVrouw">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>GeboorteDatum</label>
+                    <select asp-for="GeboorteDatum">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>Email</label>
+                    <select asp-for="Email">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>TelefoonWerk</label>
+                    <select asp-for="TelefoonWerk">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+            
+            <div class="item" style="width: 30%;">
+                <div class="form-group">
+                    <label>TelefoonMobiel</label>
+                    <select asp-for="TelefoonMobiel">
+                        @{ c = 'A'; }
+                        @foreach (string column in Model.Columns) {
+                            <option value="@c">@column</option>
+                            c++;
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Importeren" class="btn add">
+    </div>
+
+    <input type="text" value="@Model.FilePath" asp-for="FilePath" hidden>
+    <input type="checkbox" value="@Model.RemoveCurrent" asp-for="RemoveCurrent" hidden>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

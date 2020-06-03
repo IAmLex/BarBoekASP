@@ -113,7 +113,7 @@ namespace BarBoekASP.Data.MySQL
 
         public void RemoveAllMembers(int clubId) 
         {
-            string query = "DELETE FROM leden WHERE verenigingsID = @clubId";
+            string query = "DELETE FROM `leden` WHERE `verenigingsID` = @clubId";
 
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
             parameters.Add(new KeyValuePair<string, string>("clubID", clubId.ToString()));
