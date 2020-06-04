@@ -60,8 +60,20 @@ namespace BarBoekASP.Data.Repositories
             // TODO: Add stuffs
             for (int i = 0; i < this.Shifts.Count; i++)
             {
-                this.Shifts[i].Members = members[i];
+                if (Shifts[i].Members.ID == 0)
+                {
+                    this.Shifts[i].Members = members[i];
+                    SaveLidShift(Shifts[i]);
+                }
+                /*
+                else if(Shifts[i].Members.ID != 0)
+                {
+                    break;
+                }
+               */
+                
             }
+            
 
             //foreach(ShiftDTO shift in this.Shifts)
             //{
@@ -69,17 +81,20 @@ namespace BarBoekASP.Data.Repositories
             //    {
             //       //if (AddShift(shift))
             //        //{
-                        
+
             //            this.Shifts[count].Members = member;
             //            break;
             //        //}
             //    }
             //    count++;
             //}
-           
-        }
-        
 
+        }
+
+        public void SaveLidShift(ShiftDTO shift)
+        {
+            SaveContext.InsertLidShift(shift);
+        }
 
     }
 }
