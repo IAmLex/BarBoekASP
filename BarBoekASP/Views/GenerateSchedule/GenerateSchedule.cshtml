@@ -65,7 +65,7 @@
                         <td>@shift.StartMoment.TimeOfDay</td>
                         <td>@shift.EndMoment.TimeOfDay</td>
                         <td>@shift.Members.Name</td>
-                        <td><a asp-controller="GenerateScheduleController" asp-action="Edit" asp-route-id="@shift.ID" id="edit" class="btn">Edit</a></td>
+                        <td><a asp-controller="GenerateSchedule" asp-action="Edit" asp-route-id="@shift.ID" id="edit" class="btn">Edit</a></td>
                         @*<td><input id="edit" class="btn" type="submit" value="Bewerk" name="Edit"></td>*@
                         <td><input id="edit" class="btn" type="submit" value="Verwijder" name="Delete" formmethod="delete"></td>
                     

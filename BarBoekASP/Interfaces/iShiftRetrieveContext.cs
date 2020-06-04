@@ -10,5 +10,6 @@ namespace BarBoekASP.Interfaces
     {
         List<ShiftDTO> GetAllShift();
         ShiftDTO FindShiftById(int id);
+        List<ShiftDTO> GetAllShiftsForClub(string month);
     }
 }

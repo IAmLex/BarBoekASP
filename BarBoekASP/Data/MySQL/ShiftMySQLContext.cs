@@ -39,7 +39,7 @@ namespace BarBoekASP.Data.MySQL
 
         public ShiftDTO FindShiftById(int id)
         {
-            string query = "Select * from shift where id=@id";
+            string query = "Select * from dienst where id=@id";
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
             parameters.Add(new KeyValuePair<string, string>("id", id.ToString()));
 
@@ -93,6 +93,61 @@ namespace BarBoekASP.Data.MySQL
 
             ExecuteQuery(sql, parameters);
         }
+
+       
+        public List<ShiftDTO> GetAllShiftsForClub(string month)
+        {
+            string query = "SELECT * FROM dienst WHERE MONTH(startMoment) = @month";
+
+
+
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            //  parameters.Add(new KeyValuePair<string, string>("id", id.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("month", month));
+
+
+            DataSet results = ExecuteQuery(query, parameters);
+
+
+            List<ShiftDTO> shifts = new List<ShiftDTO>();
+            if (results != null)
+            {
+                for (int i = 0; i < results.Tables[0].Rows.Count; i++)
+                {
+                    ShiftDTO shift = DataSetParser.DataSetToShift(results, i);
+                    if (shift.ID != 0)
+                    { 
+                        // Get members ID
+                        query = "SELECT lidID FROM `lid-dienst-combo` WHERE dienstID=@id";
+                        parameters.Clear();
+                        parameters.Add(new KeyValuePair<string, string>("id", shift.ID.ToString()));
+
+                    DataSet res = ExecuteQuery(query, parameters);
+                        if (res.Tables[0].Rows.Count != 0)
+                        {
+                            int memberId = (int)res.Tables[0].Rows[0][0];
+
+                            // Get actual member
+                            query = "SELECT * FROM leden WHERE id = @id";
+                            parameters.Clear();
+                            parameters.Add(new KeyValuePair<string, string>("id", memberId.ToString()));
+
+                            DataSet member = ExecuteQuery(query, parameters);
+
+                            // Add member to shift
+                            shift.Members = DataSetParser.DataSetToMember(member, 0);
+                        }
+                    }
+                    shifts.Add(shift);
+                }
+            }
+
+
+
+            return shifts;
+        }
+
+        
 
         public void DeleteSchedule(int id)
         {

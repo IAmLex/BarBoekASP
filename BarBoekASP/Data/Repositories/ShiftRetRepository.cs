@@ -22,5 +22,9 @@ namespace BarBoekASP.Data.Repositories
         {
             return ContextRet.FindShiftById(id);
         }
+        public List<ShiftDTO> GetAllShiftsForClub(string month)
+        {
+           return ContextRet.GetAllShiftsForClub(month);
+        }
     }
 }

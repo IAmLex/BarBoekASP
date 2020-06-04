@@ -1,5 +1,6 @@
 ﻿using BarBoekASP.Data.MySQL;
 using BarBoekASP.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -97,6 +98,25 @@ namespace BarBoekASP
                 EventType = (Soort)(int)set.Tables[0].Rows[rowIndex][4],
                 MaxMemberCount = (int)set.Tables[0].Rows[rowIndex][5]
             };
+        }
+
+        public static ShiftDTO DataSetToShiftWithMember(DataSet shift,DataSet member, int rowIndex)
+        {
+            //MemberMySQLContext a;
+            //ShiftMySQLContext b;
+            //string connectionString = "Server=84.31.134.4;Database=barboekmain;User Id=newuser;Password=test;";
+            //a = new MemberMySQLContext(connectionString);
+            //b = new ShiftMySQLContext(connectionString);
+
+            ShiftDTO output = DataSetParser.DataSetToShift(shift, 0);
+            output.Members = DataSetParser.DataSetToMember(member, 0);
+
+            //return new ShiftDTO()
+            //{
+            //    Members = DataSetParser.DataSetToMember(member, 0),
+
+            //};
+            return output;
         }
 
     }
