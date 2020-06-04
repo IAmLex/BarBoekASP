@@ -456,3 +456,31 @@ h1 {
     background-color: rgb(54, 215, 243);
 }
 /*---------------------------------------------------------------------------------------------------------*/
+
+/*Generate Report page css-------------------------------------------------------------------------------*/
+.itemsRow {
+    display: flex;
+    background-color: blue;
+}
+
+.specifierRadio {
+    margin-bottom:20%;
+}
+
+.col-lg-2.SpecifierRB {
+    margin-top:5%;
+    flex: 0 0 25.666667%;
+    max-width: 25.666667%;
+}
+
+.checkboxlist {
+    border: 2px solid #ccc;
+    width: auto%;
+    height: 175px;
+    margin-top: 15%;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    margin-bottom: 15%;
+}
+
+/*---------------------------------------------------------------------------------------------------------*/
