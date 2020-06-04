@@ -90,15 +90,25 @@ namespace BarBoekASP.Controllers
 
             return View(new ShiftViewModel());
         }
-        /*
+
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            // Get current shift by ID
+            ShiftDTO shift = this.shiftRetRepository.GetByID(id);
 
-            return View(shift);
+            ShiftDetailViewModel model = new ShiftDetailViewModel() 
+            {
+                ID = shift.ID,
+                Name = shift.Name,
+                StartMoment = shift.StartMoment,
+                EndMoment = shift.EndMoment,
+                EventType = shift.EventType,
+                MaxMemberCount = shift.MaxMemberCount
+            };
+
+            return View(model);
         }
-        */
+
         [HttpPost]
         public IActionResult Edit(ShiftViewModel shiftViewModel)
         {

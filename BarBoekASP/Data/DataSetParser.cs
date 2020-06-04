@@ -94,7 +94,7 @@ namespace BarBoekASP
                 Name = set.Tables[0].Rows[rowIndex][1].ToString(),
                 StartMoment = (DateTime)set.Tables[0].Rows[rowIndex][2],
                 EndMoment = (DateTime)set.Tables[0].Rows[rowIndex][3],
-                EventType = (ShiftDTO.Soort)(int)set.Tables[0].Rows[rowIndex][4],
+                EventType = (Soort)(int)set.Tables[0].Rows[rowIndex][4],
                 MaxMemberCount = (int)set.Tables[0].Rows[rowIndex][5]
             };
         }

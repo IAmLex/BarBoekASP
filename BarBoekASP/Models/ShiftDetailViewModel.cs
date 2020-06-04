@@ -7,14 +7,6 @@ namespace BarBoekASP.Models
 {
     public class ShiftDetailViewModel
     {
-        public enum Soort
-        {
-            Eenmalig = 0,
-            Wekelijks = 1,
-            Maandelijks = 2,
-            Evenement = 3
-        }
-
         public int ID { get; set; }
         public string Name { get; set; }
         public DateTime StartMoment { get; set; }
