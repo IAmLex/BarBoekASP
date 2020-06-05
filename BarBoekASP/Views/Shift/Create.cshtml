@@ -4,31 +4,40 @@
 }
 
 <h2>create</h2>
-
-<form asp-action="Create" method="POST">
+<script>
+    function CheckDates() {
+        var startDate = document.getElementById("newModel_StartMoment");
+        var endDate = document.getElementById("newModel_EndMoment");
+        if (Date.parse(startDate.value) > Date.parse(endDate.value)) {
+            event.preventDefault();
+            alert("De einddatum moet na de begindatum zijn.");
+    }
+    }
+</script>
+<form asp-action="Create" method="POST" onsubmit="CheckDates()">
     <div class="form-group">
         <span class="badge">Name</span>
-        <input asp-for="@Model.newModel.Name" class="form-control" />
+        <input required asp-for="@Model.newModel.Name" class="form-control" />
     </div>
 
     <div class="form-group">
         <span class="badge">Start</span>
-        <input asp-for="@Model.newModel.StartMoment" class="form-control">
+        <input required asp-for="@Model.newModel.StartMoment" class="form-control">
     </div>
 
     <div class="form-group">
         <span class="badge">Eind</span>
-        <input asp-for="@Model.newModel.EndMoment" class="form-control">
+        <input required asp-for="@Model.newModel.EndMoment" class="form-control">
     </div>
 
-    <select asp-for="@Model.newModel.EventType">
+    <select required asp-for="@Model.newModel.EventType">
         <option value="1">@Soort.Eenmalig</option>
         <option value="2">@Soort.Evenement</option>
         <option value="3">@Soort.Maandelijks</option>
         <option value="4">@Soort.Wekelijks</option>
     </select>
 
-    <div class="form-group">
+    <div required class="form-group">
         <span class="badge">Max Aantal Leden</span>
         <input type="number" min="0" asp-for="@Model.newModel.MaxMemberCount" class="form-control">
     </div>
