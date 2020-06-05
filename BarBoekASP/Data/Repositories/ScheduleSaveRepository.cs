@@ -81,7 +81,7 @@ namespace BarBoekASP.Data.Repositories
         public void SaveLidShift(ShiftDTO shift)
         {
             SaveContext.InsertLidShift(shift);
-    }
+        }
     }
 
    

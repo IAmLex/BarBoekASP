@@ -70,7 +70,7 @@ namespace BarBoekASP.Controllers
 
             foreach (ShiftDTO shiftmember in scheduleSaveRepository.Shifts)
             {
-                scheduleSaveRepository.SaveLidShift(shiftmember);
+                
                 ShiftDetailViewModel model = new ShiftDetailViewModel();
 
                 model.EndMoment = shiftmember.EndMoment;
