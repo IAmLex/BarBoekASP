@@ -1,4 +1,7 @@
 ﻿using BarBoekASP.Data.MySQL;
+using BarBoekASP.Logic.Address;
+using BarBoekASP.Logic.Club;
+using BarBoekASP.Logic.UserLogin;
 using BarBoekASP.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
@@ -117,6 +120,40 @@ namespace BarBoekASP
 
             //};
             return output;
+        }
+        public static AddressModel DataSetToaddress(DataSet set, int rowIndex)
+        {
+            return new ClubModel()
+            {
+                ID = (int)set.Tables[0].Rows[rowIndex][0],
+                ZipCode = set.Tables[0].Rows[rowIndex][1].ToString(),
+                Number = (int)set.Tables[0].Rows[rowIndex][2],
+                Addition = set.Tables[0].Rows[rowIndex][3].ToString(),
+                Street = set.Tables[0].Rows[rowIndex][4].ToString()
+            };
+        }
+        public static ClubModel DataSetToclub(DataSet set, int rowIndex)
+        {
+            return new ClubModel()
+            {
+                ID = (int)set.Tables[0].Rows[rowIndex][0],
+                Name = set.Tables[0].Rows[rowIndex][1].ToString(),
+                AID = (int)set.Tables[0].Rows[rowIndex][2],
+                Email = set.Tables[0].Rows[rowIndex][3].ToString(),
+                Postcode = set.Tables[0].Rows[rowIndex][4].ToString(),
+                ClubNumber = set.Tables[0].Rows[rowIndex][5].ToString(),
+                Test = set.Tables[0].Rows[rowIndex][6].ToString(),
+                Comment = set.Tables[0].Rows[rowIndex][7].ToString()
+            };
+        }
+        public static UserTest DataSetToUser(DataSet set, int rowIndex)
+        {
+            return new UserTest()
+            {
+                UID = (int)set.Tables[0].Rows[rowIndex][0],
+                UEmail = set.Tables[0].Rows[rowIndex][1].ToString(),
+                Password = set.Tables[0].Rows[rowIndex][2].ToString()
+            };
         }
 
     }

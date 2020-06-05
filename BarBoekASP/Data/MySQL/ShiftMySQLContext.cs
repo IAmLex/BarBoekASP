@@ -66,7 +66,7 @@ namespace BarBoekASP.Data.MySQL
 
         public void DeleteShift(int id)
         {
-            string sql = "delete from dienst where ID=@id";
+            string sql = "delete from dienst where ID=@id; DELETE FROM `lid-dienst-combo` WHERE dienstID=@id ";
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
             parameters.Add(new KeyValuePair<string, string>("id", id.ToString()));
 
@@ -74,25 +74,17 @@ namespace BarBoekASP.Data.MySQL
         }
         public void UpdateShift(ShiftDTO shift)
         {
-            string sql = "update dienst set StartMoment=@startmoment EindMoment=@eindmoment Soort=@soort where ID=@id ";
+            string sql = "UPDATE dienst SET startMoment=@startmoment, eindMoment=@eindmoment, soort=@soort, maxLeden=@maxleden WHERE ID=@id;";
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
             parameters.Add(new KeyValuePair<string, string>("id", shift.ID.ToString()));
-            parameters.Add(new KeyValuePair<string, string>("startmoment", shift.StartMoment.ToString()));
-            parameters.Add(new KeyValuePair<string, string>("eindmoment", shift.EndMoment.ToString()));
-            parameters.Add(new KeyValuePair<string, string>("soort", shift.EventType.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("startmoment", shift.StartMoment.ToString("yyyy-MM-dd hh:mm:ss")));
+            parameters.Add(new KeyValuePair<string, string>("eindmoment", shift.EndMoment.ToString("yyyy-MM-dd hh:mm:ss")));
+            parameters.Add(new KeyValuePair<string, string>("soort", ((int)shift.EventType).ToString()));
+            parameters.Add(new KeyValuePair<string, string>("maxLeden", shift.MaxMemberCount.ToString()));
 
             ExecuteQuery(sql, parameters);
         }
-        public void InsertLidShift(ShiftDTO shift)
-        {
-            string sql = "INSERT INTO `lid-dienst-combo` (lidID, dienstID) VALUES(@lidid, @dienstid);";
-            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
-            parameters.Add(new KeyValuePair<string, string>("lidid", shift.Members.ID.ToString()));
-            parameters.Add(new KeyValuePair<string, string>("dienstid", shift.ID.ToString()));
-           
-
-            ExecuteQuery(sql, parameters);
-        }
+       
 
        
         public List<ShiftDTO> GetAllShiftsForClub(string month)

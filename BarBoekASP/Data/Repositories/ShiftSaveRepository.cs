@@ -17,14 +17,19 @@ namespace BarBoekASP.Data.Repositories
             context = contextsave;
         }
 
+        public void DeleteShift(int id)
+        {
+            context.DeleteShift(id);
+        }
+
         public void SaveShift(ShiftDTO shift)
         {
             context.InsertShift(shift);
         }
 
-        public void SaveLidShift(ShiftDTO shift)
+        public void UpdateShift(ShiftDTO shift)
         {
-            context.InsertLidShift(shift);
+            context.UpdateShift(shift);
         }
     }
 }
