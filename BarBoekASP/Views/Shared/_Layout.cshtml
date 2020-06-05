@@ -12,6 +12,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://kit.fontawesome.com/c35aa5fe66.js" crossorigin="anonymous"></script>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BarBoekASP</title>
@@ -35,24 +37,20 @@
             <h1>BarBoek.nl</h1>
             @if (!loggedIn) {
                 <ul class="row fg sb">
-                    <li><a asp-controller="Login" asp-action="Index">Home</a></li>
-                </ul>
-                <ul class="row fg sb">
-                    <li><a asp-controller="Club" asp-action="Aanmeld">Aanmelden</a></li>
-                </ul>
-                <ul class="row fg sb">
-                    <li><a asp-controller="Login" asp-action="Index">Login</a></li>
+                    <div>
+                        <li><a class="btn" asp-controller="Login" asp-action="Index">Home</a></li>
+                    </div>
+                    <div class="row">
+                        <li><a class="btn" asp-controller="Club" asp-action="Aanmeld">Aanmelden</a></li>
+                        <li><a class="btn" asp-controller="Login" asp-action="Index">Login</a></li>
+                    </div>
                 </ul>
             } 
             else 
             {
                 <ul class="row fg sb">
-                    <li><a asp-controller="Dashboard" asp-action="Index">Home</a></li>
-                </ul>
-
-                // Add logout
-                <ul class="row fg sb">
-                    <li><a asp-controller="Login" asp-action="Logout">Logout</a></li>
+                    <li><a class="btn" asp-controller="Dashboard" asp-action="Index">Home</a></li>
+                    <li><a class="btn" asp-controller="Login" asp-action="Logout">Logout</a></li>
                 </ul>
             }
             

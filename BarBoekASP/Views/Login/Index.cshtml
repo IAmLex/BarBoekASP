@@ -1,26 +1,21 @@
 ﻿@model BarBoekASP.Logic.Club.ClubModel;
 @{
     ViewData["Title"] = "Login";
-}
+}   
 
-@using (Html.BeginForm(actionName: "Login", controllerName: "Login", FormMethod.Post))
-{
-    <div class="row">
-        <form class="form-inline" asp-action="Login">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-inline">
-                <label asp-for="ClubNumber" class="control-label">E-mail:</label>
-                <input asp-for="ClubNumber" class="form-control " />
-                <span asp-validation-for="ClubNumber" class="text-danger"></span>
-            </div>
-            <div class="form-inline">
-                <label asp-for="Postcode" class="control-label">Password:</label>
-                <input asp-for="Postcode" class="form-control" />
-                <span asp-validation-for="Postcode" class="text-danger"></span>
-            </div>
-            <div class="form-inline">
-                <input type="submit" value="Login" class="btn btn-default" />
-            </div>
-        </form>
+<form asp-action="Login" asp-controller="Login" method="POST">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="ClubNumber" class="control-label">E-mail:</label>
+        <input asp-for="ClubNumber" class="form-control " />
+        <span asp-validation-for="ClubNumber" class="text-danger"></span>
     </div>
-}
+    <div class="form-group">
+        <label asp-for="Postcode" class="control-label">Password:</label>
+        <input asp-for="Postcode" class="form-control" type="password"/>
+        <span asp-validation-for="Postcode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Login" class="btn btn-default" />
+    </div>
+</form>

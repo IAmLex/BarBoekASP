@@ -6,23 +6,28 @@
 
 <div class="row">
     <div class="col-9 row">
-        <div class="col-4">
-            <img width="100%" src="https://www.mathworks.com/help/examples/graphics/win64/OverlayBarGraphsExample_01.png">
+        <div class="col-4 col align-items-center">
+            <i class="fa fa-users fa-5x"></i>
+            <span>Aantal leden toegevoegd</span>
+            <span>4</span>
         </div>
-        <div class="col-4">
-            <img width="100%" src="https://www.mathworks.com/help/examples/graphics/win64/OverlayBarGraphsExample_01.png">
+        <div class="col-4 col align-items-center">
+            <i class="fas fa-cocktail fa-5x"></i>
+            <span>aantal diensten deze maand</span>
+            <span>5</span>
         </div>
-        <div class="col-4">
-            <img width="100%" src="https://www.mathworks.com/help/examples/graphics/win64/OverlayBarGraphsExample_01.png">
+        <div class="col-4 col align-items-center">
+            <i class="fas fa-stopwatch fa-5x"></i>
+            <span>aantal open diensten deze maand</span>
+            <span>5</span>
         </div>
     </div>
 
-    <div class="col-3">
-        <div id="help">
-            <a asp-area="" asp-controller="Shift" asp-action="Index"><div class="NavigatieItem">Dienst</div></a>
-            <a asp-area="" asp-controller="GenerateSchedule" asp-action="GenerateSchedule"><div class="NavigatieItem">Rooster Genereren</div></a>
-            <a asp-area="" asp-controller="Club" asp-action="Index"><div class="NavigatieItem">Club</div></a>
-            <a asp-area="" asp-controller="GenerateReport" asp-action="Index"><div class="NavigatieItem">Rapport Genereren</div></a>
-        </div>
+    <div class="col-3 col sidenav">
+        <a asp-area="" asp-controller="User" asp-action="Import" class="btn">leden importeren</a>
+        <a asp-area="" asp-controller="Shift" asp-action="Create" class="btn">Dienst</a>
+        <a asp-area="" asp-controller="GenerateSchedule" asp-action="GenerateSchedule" class="btn">Rooster Genereren</a>
+        <a asp-area="" asp-controller="Club" asp-action="Index" class="btn">Club</a>
+        <a asp-area="" asp-controller="GenerateReport" asp-action="Index" class="btn">Rapport Genereren</a>
     </div>
 </div>
