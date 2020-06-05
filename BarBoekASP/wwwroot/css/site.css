@@ -455,3 +455,16 @@ h1 {
 .generateReporFullBodyDivHelpCol {
     background-color: red; /*REMOVE LATER*/
 }
+
+.items {
+    text-align: center;
+}
+
+.NavigatieItem {
+    padding: 5%;
+    margin-top: 2%;
+    background-color: grey;
+    border-radius: 15px;
+    color: white;
+    margin: 10px;
+}
