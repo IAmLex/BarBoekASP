@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewData["Title"] = "GenerateReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Rapport Genereren</h3>
+<container class="generateReportFullBodyContainer">
+    <div class="row generateReporFullBodyDivRow">
+        <div class="col-lg-9 generateReporFullBodyDivItemsCol">
+            <div class="row templateRow">
+                <div class="templateRowContent">
+                    <h2>xxxxx</h2>
+                </div>
+            </div>
+            <form>
+                <div class="itemsRow">
+                    <div class="col SpecifierRB">
+                        <div class="form-check">
+                            <input class="form-check-input specifierRadio" type="radio" name="specifierRadios" id="nameRadio" value="name" checked>
+                            <label class="form-check-label specifierRadio" for="nameRadio">
+                                Naam
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input specifierRadio" type="radio" name="specifierRadios" id="shiftDateRadio" value="shiftDate">
+                            <label class="form-check-label specifierRadio" for="shiftDateRadio">
+                                Datum dienst
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input specifierRadio" type="radio" name="specifierRadios" id="ageRadio" value="age">
+                            <label class="form-check-label specifierRadio" for="ageRadio">
+                                Leeftijd
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input specifierRadio" type="radio" name="specifierRadios" id="excusedAbsenceRadio" value="excusedAbsence">
+                            <label class="form-check-label specifierRadio" for="excusedAbsenceRadio">
+                                Verlof
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input specifierRadio" type="radio" name="specifierRadios" id="groupRadio" value="group">
+                            <label class="form-check-label specifierRadio" for="groupRadio">
+                                Groep
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 selectMember">
+        <div class="checkboxlist">
+            @{
+                var members = (List<MemberDTO>)ViewData["MemberList"];
+            }
+            @foreach (MemberDTO member in @members)
+            {
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">@member.Name</label>
+                </div>
+            }
+        </div>
+    </div>
+                    <div class="col-lg-2 specifierEditor">
+                        @Html.TextBox("fromInput", "Vanaf", new { @class = "form-control" })
+                        @Html.TextBox("tillInput", "Tot", new { @class = "form-control" })
+
+                        <!--<div class="form-group">
+        <label class="control-label">First Name</label>
+        <input type="text" class="form-control" name="fname" id="fname">
+    </div>
+    <script>
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+    </script>-->
+                    </div>
+                    <div class="col selectTable">
+                        <h2>xxx</h2>
+                    </div>
+                    <div class="col selectColumns">
+                        <h2>xxx</h2>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col generateReporFullBodyDivHelpCol">
+            <h2>xxx</h2>
+        </div>
+
+    </div>
+</container>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
