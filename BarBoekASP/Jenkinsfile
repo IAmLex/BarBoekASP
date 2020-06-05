@@ -120,14 +120,5 @@ pipeline {
             discordSend description: 'Jenkins Pipeline Build', footer: '', image: '', link: env.BUILD_URL, result: currentBuild.currentResult, thumbnail: '', title: JOB_NAME, webhookURL: 'https://discordapp.com/api/webhooks/710743967431393282/3TIdE8NOffEoAlG0WMwYEGDQtciQhkd_awjHWAivlBKS2o_9yDKbUYVc675Uqo1faWwy'
             deleteDir() /* clean up our workspace */
         }
-        failure {
-            updateGitlabCommitStatus name: "${servicename}", state: 'failed'
-        }
-        success {
-            updateGitlabCommitStatus name: "${servicename}", state: 'success'
-        }
-        aborted {
-            updateGitlabCommitStatus name: "${servicename}", state: 'canceled'
-        }
     }
 }
