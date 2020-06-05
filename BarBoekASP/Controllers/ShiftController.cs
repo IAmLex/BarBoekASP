@@ -30,21 +30,6 @@ namespace BarBoekASP.Controllers
 
         ShiftDTO Shift = new ShiftDTO();
 
-        void NewUser()
-        {
-            
-            //string dit = $"'{Shift.ID}', '{Shift.Name}', '{Convert.ToString(Shift.StartMoment)}', '{Convert.ToString(Shift.EndMoment)}', '{Shift.EventType}', '{Shift.MaxMemberCount}'";
-            //MySqlCommand AddSingleUser = new MySqlCommand("INSERT INTO `dienst`(`ID`, `naam`, `startMoment`, `eindMoment`, `soort`, `maxLeden`) VALUES" + "(" + dit + ")", con);
-            //AddSingleUser.ExecuteNonQuery();
-            //foreach (Control control in groupBox1.Controls)
-            //{
-            //    if (control.GetType() == typeof(TextBox))
-            //    {
-            //        control.Text = "";
-            //    }
-            //}
-        }
-
         [HttpGet]
         // /Shift/Create
         public IActionResult Create()
