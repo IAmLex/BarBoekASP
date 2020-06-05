@@ -9,6 +9,7 @@ namespace BarBoekASP.Interfaces
     public interface iScheduleSaveContext
     {
         void InsertSchedule(ScheduleDTO sched);
+
         void InsertLidShift(ShiftDTO shift);
         //Save(Schedule s);
         // ¯\_(ツ)_/¯ Do something 

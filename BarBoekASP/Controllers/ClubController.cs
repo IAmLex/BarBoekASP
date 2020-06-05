@@ -32,16 +32,17 @@ namespace BarBoekASP.Controllers
             }
             else
             {
-                club.Test = "Jaarabonement";
+                    club.Test = "Jaarabonement";             
             }
             if (!check)
             {
+                context.InsertAddress(club);
                 context.InsertClub(club);
                 return RedirectToAction("Index");
             }
             else
             {
-                ModelState.AddModelError("Name", "User with this name already exists.");
+                ModelState.AddModelError("Name", "Deze vereniging bestaat al.");
                 return View("Aanmeld");
             }
         }

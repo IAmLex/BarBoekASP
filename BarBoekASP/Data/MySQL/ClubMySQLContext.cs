@@ -1,4 +1,5 @@
 ﻿using BarBoekASP.Interfaces;
+using BarBoekASP.Logic.Address;
 using BarBoekASP.Logic.Club;
 using BarBoekASP.Models;
 using System;
@@ -31,8 +32,6 @@ namespace BarBoekASP.Data.MySQL
                 {
                     ClubDTO c = DataSetParser.DataSetToClub(results, x);
                     clubs.Add(c);
-
-                    //clubs.Add(c);
                 }
             }
             return clubs;
@@ -78,10 +77,9 @@ namespace BarBoekASP.Data.MySQL
         }       
         public void InsertClub(ClubModel club)
         {
-            string sql = "SET FOREIGN_KEY_CHECKS=0;INSERT INTO club (name,adresId,email,password,clubnumber,type,comment) VALUES(@name,@adresId,@email,@password,@clubnumber,@type,@comment);SET FOREIGN_KEY_CHECKS=0;";
+            string sql = "SET FOREIGN_KEY_CHECKS=0;INSERT INTO club (name,adresId,email,password,clubnumber,type,comment) VALUES(@name,LAST_INSERT_ID(),@email,@password,@clubnumber,@type,@comment);SET FOREIGN_KEY_CHECKS=0;";
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
             parameters.Add(new KeyValuePair<string, string>("name", club.Name.ToString()));
-            parameters.Add(new KeyValuePair<string, string>("adresId", club.AID.ToString()));
             parameters.Add(new KeyValuePair<string, string>("email", club.Email.ToString()));
             parameters.Add(new KeyValuePair<string, string>("password", club.Postcode.ToString()));
             parameters.Add(new KeyValuePair<string, string>("clubnumber", club.ClubNumber));
@@ -95,7 +93,7 @@ namespace BarBoekASP.Data.MySQL
         {
             string sql = " INSERT INTO adres(zipcode, number, addition) VALUES(@zipcode, @number, @addition);";
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
-            parameters.Add(new KeyValuePair<string, string>("zipcode", club.ZipCode));
+            parameters.Add(new KeyValuePair<string, string>("zipcode", club.Postcode));
             parameters.Add(new KeyValuePair<string, string>("number", club.Number.ToString()));
             parameters.Add(new KeyValuePair<string, string>("addition", club.Addition));
 
@@ -146,6 +144,19 @@ namespace BarBoekASP.Data.MySQL
                 }
             }
             return clubs;
+        }
+        public void FindAddressBy(ClubModel club)
+        {
+            string query = "Select * from adres where zipcode=@zipcode";
+            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
+            parameters.Add(new KeyValuePair<string, string>("zipcode", club.ZipCode));
+            DataSet results = ExecuteQuery(query, parameters);
+            AddressModel address = new AddressModel();
+            if (results != null && results.Tables[0].Rows.Count > 0)
+            {
+               address = DataSetParser.DataSetToaddress(results, 0);
+            }
+            club.AID = address.AID;
         }
     }
 }

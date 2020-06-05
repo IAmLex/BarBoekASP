@@ -8,6 +8,9 @@ using BarBoekASP.Logic.UserLogin;
 using BarBoekASP.Models;
 using Microsoft.AspNetCore.Mvc;
 
+using Microsoft.AspNetCore.Http;
+
+
 namespace BarBoekASP.Controllers
 {
     public class LoginController : Controller
@@ -33,7 +36,10 @@ namespace BarBoekASP.Controllers
             {
                 if (ucheck)
                 {
-                    return View("Fout");
+                    int? test = HttpContext.Session.GetInt32("loggedIn");
+                    HttpContext.Session.SetInt32("loggedIn", 1);
+
+                    return RedirectToAction("Index", "Dashboard");
                 }
                 else
                 {
@@ -55,14 +61,23 @@ namespace BarBoekASP.Controllers
             if (retcontext.CheckValidate(user) == false)
             {
                 context.InsertUser(user);
-                return View("Index");
+                TempData["Success"] = "U heeft een account aangemaakt.";
+                return View("Confirm");
             }
             else
             {
-                ModelState.AddModelError("Email", "User with this email already exists");
+                ModelState.AddModelError("UEmail", "Deze email bestaat al.");
                 return View("Confirm");
             }
 
+        }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Login");
         }
     }
 }

@@ -79,7 +79,6 @@ namespace BarBoekASP.Data.MySQL
             parameters.Add(new KeyValuePair<string, string>("vID", sched.VerenigingID.ToString()));
             ExecuteQuery(sql, parameters);
         }
-
         public void InsertLidShift(ShiftDTO shift)
         {
             string sql = "INSERT INTO `lid-dienst-combo` (lidID, dienstID) VALUES(@lidid, @dienstid);";
@@ -91,4 +90,5 @@ namespace BarBoekASP.Data.MySQL
             ExecuteQuery(sql, parameters);
         }
     }
+   
 }

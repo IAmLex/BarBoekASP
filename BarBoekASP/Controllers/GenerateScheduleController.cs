@@ -7,9 +7,7 @@ using BarBoekASP.Data.Repositories;
 using BarBoekASP.Interfaces;
 using BarBoekASP.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
-using Org.BouncyCastle.Crypto.Tls;
 
 namespace BarBoekASP.Controllers
 {
@@ -51,69 +49,47 @@ namespace BarBoekASP.Controllers
         [HttpGet]
         public IActionResult GenerateSchedule()
         {
-           
             return View(new ShiftViewModel());
         }
 
         [HttpPost]
-        public IActionResult GenerateSchedule(string month)
+        public IActionResult GenerateSchedule(string month, string VoorkeurLeden)
         {
             List<MemberDTO> members = memberRetRepository.GetAll();
 
             ShiftViewModel shiftViewModel = new ShiftViewModel();
 
             List<ShiftDTO> membershifts = shiftRetRepository.GetAllShiftsForClub(month);
-           /* 
-            if (membershifts[0].Members.ID != 0)
+
+            foreach (ShiftDTO shift in membershifts)
             {
-                foreach (ShiftDTO shift in membershifts)
-                {
-                    ShiftDetailViewModel model = new ShiftDetailViewModel();
+                scheduleSaveRepository.Shifts.Add(shift);
 
-                    model.EndMoment = shift.EndMoment;
-                    model.StartMoment = shift.StartMoment;
-                    model.Members = shift.Members;
-                    model.ID = shift.ID;
-
-                    shiftViewModel.Shifts.Add(model);
-                }
+                scheduleSaveRepository.PlanShifts(members, VoorkeurLeden);
             }
-            */
-           // else if (membershifts[0].Members.ID == 0)
-          //  {
-                foreach (ShiftDTO shift in membershifts)
-                {
-                    scheduleSaveRepository.Shifts.Add(shift);
-                    
-                    scheduleSaveRepository.PlanShifts(members);
-                }
 
-                foreach (ShiftDTO shiftmember in scheduleSaveRepository.Shifts)
-                {
-                    //shiftSaveRepository.SaveLidShift(shiftmember);
-                    ShiftDetailViewModel model = new ShiftDetailViewModel();
+            foreach (ShiftDTO shiftmember in scheduleSaveRepository.Shifts)
+            {  
+                ShiftDetailViewModel model = new ShiftDetailViewModel();
 
-                    model.EndMoment = shiftmember.EndMoment;
-                    model.StartMoment = shiftmember.StartMoment;
-                    model.Members = shiftmember.Members;
-                    model.ID = shiftmember.ID;
+                model.EndMoment = shiftmember.EndMoment;
+                model.StartMoment = shiftmember.StartMoment;
+                model.Members = shiftmember.Members;
+                model.ID = shiftmember.ID;
 
-                    shiftViewModel.Shifts.Add(model);
-                }
-            //}
+                shiftViewModel.Shifts.Add(model);
+            }
 
             return View(shiftViewModel);
         }
-        
-        
-        public IActionResult Delete(int id)
+
+       
+        public IActionResult Delete(int Delete)
         {
-            this.shiftSaveRepository.DeleteShift(id);
-            
-            //meassage delete
+
             return View();
         }
-        
+
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -131,23 +107,10 @@ namespace BarBoekASP.Controllers
 
             return View(model);
         }
-        
+
         [HttpPost]
-        public IActionResult Edit(ShiftDetailViewModel Model)
+        public IActionResult Edit(ShiftViewModel shiftViewModel)
         {
-
-            ShiftDTO shift = new ShiftDTO()
-            {
-                ID = Model.ID,
-                Name = Model.Name,
-                StartMoment = Model.StartMoment,
-                EndMoment = Model.EndMoment,
-                EventType = Model.EventType,
-                MaxMemberCount = Model.MaxMemberCount,
-                Members = Model.Members
-            };
-            shiftSaveRepository.UpdateShift(shift);
-
             // Create dto from model
             // Save model to database
 
