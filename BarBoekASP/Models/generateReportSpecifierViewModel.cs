@@ -11,5 +11,6 @@ namespace BarBoekASP.Models
         public string totTextInput { get; set; }
         public DateTime vanafDateTimeInput { get; set; }
         public DateTime totDateTimeInput { get; set; }
+        public string bevatTextInput { get; set; }
     }
 }

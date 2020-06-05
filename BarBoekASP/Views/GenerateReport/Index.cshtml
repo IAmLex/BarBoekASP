@@ -1,4 +1,5 @@
 ﻿@model generateReportTotalListsViewModel
+
 @{
     ViewData["Title"] = "GenerateReport";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -24,7 +25,7 @@
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input specifierRadio" type="radio" name="specifierRadios" id="shiftDateRadio" value="shiftDate">
+                            <input class="form-check-input specifierRadio" type="radio" name="specifierRadios" id="shiftDateRadio" value="date">
                             <label class="form-check-label specifierRadio" for="shiftDateRadio">
                                 Datum dienst
                             </label>
@@ -36,7 +37,7 @@
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input specifierRadio" type="radio" name="specifierRadios" id="excusedAbsenceRadio" value="excusedAbsence">
+                            <input class="form-check-input specifierRadio" type="radio" name="specifierRadios" id="excusedAbsenceRadio" value="exceptionAbsence">
                             <label class="form-check-label specifierRadio" for="excusedAbsenceRadio">
                                 Verlof
                             </label>
@@ -63,20 +64,19 @@
                     </div>
                     <div class="col specifierEditor">
                         <div class="form-group">
-                            <span class="badge">VanafText</span>
-                            <input asp-for="@Model.specifiersToAdd.vanafTextInput+" class="form-control" />
+                            <input asp-for="@Model.specifiersToAdd.bevatTextInput+" class="form-control" placeholder="Bevat" />
                         </div>
                         <div class="form-group">
-                            <span class="badge">TotText</span>
-                            <input asp-for="@Model.specifiersToAdd.totTextInput+" class="form-control" />
+                            <input asp-for="@Model.specifiersToAdd.vanafTextInput+" class="form-control" placeholder="Vanaf (cijfer)" />
                         </div>
                         <div class="form-group">
-                            <span class="badge">VanafDT</span>
-                            <input asp-for="@Model.specifiersToAdd.vanafDateTimeInput+" class="form-control" />
+                            <input asp-for="@Model.specifiersToAdd.totTextInput+" class="form-control" placeholder="Tot (cijfer)" />
                         </div>
                         <div class="form-group">
-                            <span class="badge">TotDT</span>
-                            <input asp-for="@Model.specifiersToAdd.totDateTimeInput+" class="form-control" />
+                            <input asp-for="@Model.specifiersToAdd.vanafDateTimeInput+" class="form-control" placeholder="Vanaf (datum)" />
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="@Model.specifiersToAdd.totDateTimeInput+" class="form-control" placeholder="Tot (datum)" />
                         </div>
                         <div class="form-group">
                             <div class="row sb">
@@ -88,15 +88,94 @@
 
 
                 <div class="col selectTable">
-                    <h2>xxx</h2>
+                    <form id="selectTable" action="selectColumn" method="post">
+                        @{
+                            var tables = (List<string>)ViewData["tables"];
+                        }
+                        @Html.DropDownListFor(model => model.selectedTable, new SelectList(tables), htmlAttributes: new { @class = "form-control", onchange = "selectColumn()", id = "ddlTables" })
+                    </form>
+
                 </div>
-                <div class="col selectColumns">
-                    <h2>xxx</h2>
-                </div>
+                <form method="post" asp-action="addSelectedColumns" asp-controller="GenerateReport">
+                    <div class="col selectColumns">
+                        <div class="checkboxlist">
+
+                            @{
+                                var columns = Model.columns;
+                                int count = 0;
+
+                                @if (columns != null)
+                                {
+                                    foreach (string column in @columns)
+
+                                    {
+                                        string id = "check" + count.ToString();
+                                        count++;
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" name="columnsCheck" id=@id value="@column">@column</label>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                        <div class="form-group">
+                            <div class="row sb">
+                                <input type="submit" value="asdf" />
+                                @*<input type="submit" class="btn addColumnsButton" onsubmit="addColumn()" />*@
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+                <form method="post" asp-action="ExecuteConstructedQuery" asp-controller="GenerateReport">
+                    <div class="form-group">
+                        <div class="row sb">
+                            <input type="submit" value="Genereren" />
+                            @*<input type="submit" class="btn addColumnsButton" onsubmit="addColumn()" />*@
+                        </div>
+                    </div>
+                </form>
+                
             </div>
         </div>
         <div class="col generateReporFullBodyDivHelpCol">
             <h2>xxx</h2>
         </div>
     </div>
+
+    <form id="hiddenDDLItem" method="post" action="selectThisColumn">
+        <input type="hidden" name="foo" id="foo" value="@Model.selectedTable" />
+
+    </form>
+
+
+
 </container>
+<script>
+
+    function selectColumn() {
+        var d = document.getElementById("ddlTables").value;
+        $('#foo').val(d);
+        document.getElementById('hiddenDDLItem').submit();
+    }
+
+    function addColumn() {
+        var checkedList = new Array();
+        var $boxes = $('input[name=columnsCheck]:checked');
+
+        $boxes.each(function () {
+            var boxValue = document.getElementById(this).value;
+            checkedList.push(boxValue);
+        });
+        $.ajax({
+            type: "POST",
+            url: "/GenerateReport/addSelectedColumns",
+            data: JSON.stringify(checkedList),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                alert(r + " record(s) inserted.");
+            }
+        });
+    }
+</script>

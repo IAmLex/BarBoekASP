@@ -431,19 +431,17 @@ h1 {
 /*Generate Report page css-------------------------------------------------------------------------------*/
 .itemsRow {
     display: flex;
-    background-color: blue; /*REMOVE LATER*/
 }
 
 .specifierRadio {
     margin-bottom: 20%;
-    /
+    
 }
 
 .col.SpecifierRB {
     margin-top: 5%;
     flex: 0 0 20.666667%;
     max-width: 20.666667%;
-    background-color: lightblue; /*REMOVE LATER*/
 }
 
 .row.templateRow {
@@ -456,7 +454,7 @@ h1 {
 
 .checkboxlist {
     border: 2px solid #ccc;
-    width: auto%;
+    width: auto;
     height: 175px;
     overflow-y: scroll;
     overflow-x: scroll;
@@ -465,7 +463,6 @@ h1 {
 
 .col.specifierEditor {
     margin-top: 5%;
-    background-color:aqua;
 }
 
     .col.specifierEditor .form-control {
@@ -474,7 +471,22 @@ h1 {
 
 .col.selectMember {
     margin-top: 5%;
-    background-color:deepskyblue; /*REMOVE LATER*/
+    max-width:30%;
+}
+
+.col.specifierEditor .form-group {
+    margin-top: -10px;
+    margin-bottom:0%;
+}
+
+.col.selectTable {
+    margin-top: 2%;
+    margin-right: 0%;
+    padding-left: 0;
+}
+
+.col.selectColumns {
+    margin-top:20%;
 }
 
 
@@ -485,6 +497,11 @@ h1 {
 .col-lg-8.specifierForm{
     display:flex;
     flex-wrap:nowrap;
+}
+
+.row.sb {
+    justify-content:flex-end;
+    margin-right:0%;
 }
 
 .generateReporFullBodyDivHelpCol {
