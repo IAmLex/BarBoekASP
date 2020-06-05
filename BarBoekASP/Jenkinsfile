@@ -1,0 +1,133 @@
+def servicename = "${env.JOB_BASE_NAME}"
+def deployname = "${env.JOB_NAME}"
+def suffix = ""
+def dockeruser = "merlijnv"
+
+pipeline {
+    agent { label 'linux' }
+    tools {nodejs "NodeJS"}
+    stages {
+
+        stage('Clone repository') {
+            steps {
+                /* Let's make sure we have the repository cloned to our workspace */
+                checkout scm
+
+                node('windows') {
+                    checkout scm
+                }
+            }
+        }
+
+        stage('Build + SonarQube analysis') {
+            steps {
+                script {
+                    if(env.JOB_BASE_NAME == 'frontend'){
+                        dir("frontend") {
+                            withSonarQubeEnv('My SonarQube Server') {
+                                //TODO SONAR ANGULAR
+                            }
+                        }
+                    } else {
+                        node('windows') {
+
+                            withSonarQubeEnv('My SonarQube Server') {
+                                bat "dotnet sonarscanner begin /k:\"${servicename}${suffix}\" /n:\"${servicename} Service\" /v:\"${env.BUILD_ID}\""
+                                bat "dotnet build ${servicename}"
+                                bat "dotnet sonarscanner end"
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        stage("Quality Gate"){
+            steps {
+              script{
+                sh "echo TODO fix rabbit and frontend?"
+                if(env.JOB_BASE_NAME != 'frontend'){
+                  timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
+                      script {
+                          def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+                          if (qg.status != 'OK') {
+                              error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                          }
+                      }
+
+                  }
+                }
+
+              }
+            }
+        }
+
+        stage('Build image') {
+            steps {
+                script {
+                    if (env.JOB_BASE_NAME == 'frontend') {
+                        dir("frontend") {
+                            app = docker.build("${dockeruser}/${servicename}${suffix}")
+                        }
+                    } else {
+                        app = docker.build("${dockeruser}/${servicename}${suffix}", "-f ${servicename}/Dockerfile .")
+                    }
+                }
+            }
+        }
+
+        stage('Test image') {
+            steps {
+                script {
+                    if(fileExists("${servicename}Tests")) {
+                        sh """  docker run --name ${servicename}Test${env.BUILD_ID} -d -u root merlijnv/${servicename}${suffix}:latest
+                            docker cp ${servicename}Test${env.BUILD_ID}:/app/UnitTests.trx .
+                            docker rm -f ${servicename}Test${env.BUILD_ID}"""
+                    } else {
+                        // TODO check if correct
+                        // docker.image("${dockeruser}/${servicename}${suffix}").inside {
+                        //     sh 'echo "Tests passed"'
+                        // }
+                    }
+                }
+            }
+        }
+
+        stage('Push image') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        app.push("${env.BUILD_NUMBER}")
+                        app.push("latest")
+                    }
+                }
+            }
+        }
+
+        stage('deploy') {
+            steps {
+                withFolderProperties{
+                  rancher environmentId: "${env.environmentId}", endpoint : "${env.endpoint}", credentialId: "${env.credentialId}", service: "${deployname}", image: "${dockeruser}/${servicename}${suffix}:latest", confirm: false, startFirst: null, ports: null, environments: '', timeout: 600
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo 'One way or another, I have finished'
+            step([$class: 'MSTestPublisher', testResultsFile:"UnitTests.trx", failOnError: false, keepLongStdio: true])
+            discordSend description: 'Jenkins Pipeline Build', footer: '', image: '', link: env.BUILD_URL, result: currentBuild.currentResult, thumbnail: '', title: JOB_NAME, webhookURL: 'https://discordapp.com/api/webhooks/710743967431393282/3TIdE8NOffEoAlG0WMwYEGDQtciQhkd_awjHWAivlBKS2o_9yDKbUYVc675Uqo1faWwy'
+            deleteDir() /* clean up our workspace */
+        }
+        failure {
+            updateGitlabCommitStatus name: "${servicename}", state: 'failed'
+        }
+        success {
+            updateGitlabCommitStatus name: "${servicename}", state: 'success'
+        }
+        aborted {
+            updateGitlabCommitStatus name: "${servicename}", state: 'canceled'
+        }
+    }
+}
