@@ -22,12 +22,23 @@ namespace BarBoekASP.Controllers
             _iMemberRetrieveContext = new MemberMySQLContext(connectionString);
             memberRetRepository = new MemberRetRepository(_iMemberRetrieveContext);
         }
-        public IActionResult Index()
+        public IActionResult Index(generateReportTotalListsViewModel viewmodel)
         {
+            if(viewmodel.specifiersToAdd.Equals(null))
+            {
+                viewmodel = new generateReportTotalListsViewModel { };
+            }
             List<MemberDTO> members = new List<MemberDTO> { };
             members = memberRetRepository.GetAll();
             ViewData["MemberList"] = members;
-            return View();
+            return View(viewmodel);
+        }
+
+        [HttpPost]
+        [Route("addspecifier")]
+        public IActionResult addSpecifier(generateReportTotalListsViewModel reportInfo)
+        {
+            return RedirectToAction("Index",reportInfo);
         }
     }
 }

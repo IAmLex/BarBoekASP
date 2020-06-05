@@ -25,6 +25,7 @@ namespace BarBoekASP.Controllers
         iMemberRetrieveContext _iMemberRetrieveContext;
         MemberRetRepository memberRetRepository;
 
+
         public GenerateScheduleController(IConfiguration configuration)
         {
             string connectionString = configuration.GetConnectionString("DefaultConnection");
