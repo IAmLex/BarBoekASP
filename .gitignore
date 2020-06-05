@@ -351,4 +351,4 @@ MigrationBackup/
 */Database.cs
 .vscode/*
 
-*/Excel/*
+# */Excel/*
