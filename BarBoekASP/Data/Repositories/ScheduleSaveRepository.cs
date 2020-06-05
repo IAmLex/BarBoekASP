@@ -53,41 +53,41 @@ namespace BarBoekASP.Data.Repositories
             return add;
         }
 
-        public void PlanShifts(List<MemberDTO> members)
+        public void PlanShifts(List<MemberDTO> members, string radiocheck)
         {
-            //int count = 0;
+           
 
             // TODO: Add stuffs
             for (int i = 0; i < this.Shifts.Count; i++)
             {
-                if (Shifts[i].Members.ID == 0)
+                switch (radiocheck)
                 {
-                    this.Shifts[i].Members = members[i];
-                    SaveLidShift(Shifts[i]);
-                }
-                /*
-                else if(Shifts[i].Members.ID != 0)
-                {
+                    case "radio1":
+                        //met voorkeur zonder gedraaide dienst
+                        if (Shifts[i].Members.ID == 0)
+                        {
+                            
+                            this.Shifts[i].Members = members[i];
+                            SaveLidShift(Shifts[i]);
+                        }
                     break;
+                    case "radio2":
+                        //zonder voorkeur en zonder gedraaide dienst
+                        break;
+                    case "radio3":
+                        //al bardienst gedaan, rekening houdend met voorkeur /verhindering 
+                        break;
+                    case "radio4":
+                        //al bardienst gedaan zonder voorkeur, rekening houdend met verhindering
+                        break;
                 }
-               */
+               
+               
                 
             }
             
 
-            //foreach(ShiftDTO shift in this.Shifts)
-            //{
-            //    foreach(MemberDTO member in members)
-            //    {
-            //       //if (AddShift(shift))
-            //        //{
-
-            //            this.Shifts[count].Members = member;
-            //            break;
-            //        //}
-            //    }
-            //    count++;
-            //}
+           
 
         }
 

@@ -2,83 +2,100 @@
     ViewData["Title"] = "Rooster";
 }
 
-<div>
-    <div class="row">
-        <div class="col-4">
-            <div>
-                <h1>Rooster genereren</h1>
-            </div>
-            <br>
+<div class="row">
+
+    <div class="col-9">
+        <form method="post">
             <div class="row">
-                <form method="post">
-                    <select id="selectmonth" name="month">
-                        <option value="1">January</option>
-                        <option value="2">February</option>
-                        <option value="3">Maart</option>
-                        <option value="4">April</option>
-                        <option value="5">Mei</option>
-                        <option value="6">Juni</option>
-                        <option value="7">Juli</option>
-                        <option value="8">Augustus</option>
-                        <option value="9">September</option>
-                        <option value="10">Oktober</option>
-                        <option value="11">November</option>
-                        <option value="12">December</option>
-                    </select>
-                    <input type="submit" class="btn" value="Genereren"/>
-                   
-                </form>
+                <div class="col-6 row">
+                    <div>
+                        <h1>Rooster genereren</h1>
+                    </div>
+                    <div class="col-12 row">
+                        <div class="col-6 ais">
+                            <select id="selectmonth" name="month">
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">Maart</option>
+                                <option value="4">April</option>
+                                <option value="5">Mei</option>
+                                <option value="6">Juni</option>
+                                <option value="7">Juli</option>
+                                <option value="8">Augustus</option>
+                                <option value="9">September</option>
+                                <option value="10">Oktober</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                        </div>
+
+                        <div class="col-6 ais">
+                            <input type="submit" class="btn" value="Genereren" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label id="formhead"><b>Kies 1 van deze regels hieronder om de leden automatisch in het rooster in te vullen.(Alleen Check 1 werkt hierbij word nog niet gecontroleert op voorkeur)</b></label>
+                    <div id="listlegend">
+                        <div>
+                            <input type="radio" name="VoorkeurLeden" class="form-check-input" id="radio1" value="radio1" />
+                            <label class="form-check-label" for="radio1">Vullen met leden met voorkeur, zonder gedraaide bardienst(max, 10 diensten p.p.)</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="VoorkeurLeden" class="form-check-input" id="Check2" value="radio2" />
+                            <label class="form-check-label" for="Check2">Vullen met leden zonder (actieve) voorkeur, zonder gedraaide bardienst(max. 10 diensten p.p)</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="VoorkeurLeden" class="form-check-input" id="Check3" value="radio3" />
+                            <label class="form-check-label" for="Check3">Vullen met leden die al een bardienst hebben gedaan, rekening houdend met voorkeur/ verhindering, gesorteerd op oudste bardienst (max. 10 diensten p.p.)</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="VoorkeurLeden" class="form-check-input" id="Check4" value="radio4" />
+                            <label class="form-check-label" for="Check4">Vullen met leden die al een bardienst hebben gedaan, zonder voorkeur en rekening houdend met verhindering, gesorteerd op oudste bardienst (max. 10 diensten p.p.)</label>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <!--legenda komt hier-->
-        <div class="col-5">
-            <ul class="list-inline" id="listlegend">
-                <li id="blockcolorred">item 1--------------------------</li>
-                <li id="blockcolorgreen">item 2--------------------------</li>
-                <li id="blockcolorblue">item 3--------------------------</li>
-                <li id="blockcolorpurple">item 4--------------------------</li>
-            </ul>
+        </form>
+
+
+        <div class="row">
+            <table class="table table-bordered table-hover col-12">
+                <thead>
+                    <tr>
+                        <th scope="col">Evenement</th>
+                        <th scope="col">Datum</th>
+                        <th scope="col">Begin Tijd</th>
+                        <th scope="col">Eind Tijd</th>
+                        <th scope="col">Lid</th>
+                        <th scope="col">Bewerken</th>
+                        <th scope="col">Verwijderen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ShiftDetailViewModel shift in Model.Shifts)
+                    {
+                        <tr>
+                            <th>@shift.EventType</th>
+                            <td> @shift.StartMoment.Date</td>
+                            <td>@shift.StartMoment.TimeOfDay</td>
+                            <td>@shift.EndMoment.TimeOfDay</td>
+                            <td>@shift.Members.Name</td>
+                            <td><a asp-controller="GenerateSchedule" asp-action="Edit" asp-route-id="@shift.ID" id="edit" class="btn">Bewerken</a></td>
+
+                            <td><a asp-controller="GenerateSchedule" asp-action="Delete" asp-route-id="@shift.ID" id="edit" class="btn">Verwijderen</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
-</div>
-<div class="row">
-    <table class="table table-bordered table-hover col-9">
-        <thead>
-            <tr>
-                <th scope="col">Evenement</th>
-                <th scope="col">Datum</th>
-                <th scope="col">Begin Tijd</th>
-                <th scope="col">Eind Tijd</th>
-                <th scope="col">Lid</th>
-                <th scope="col">Bewerken</th>
-                <th scope="col">Verwijderen</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (ShiftDetailViewModel shift in Model.Shifts)
-            {
-            <tr>
-                <th>@shift.EventType</th>
-                <td> @shift.StartMoment.Date</td>
-                <td>@shift.StartMoment.TimeOfDay</td>
-                <td>@shift.EndMoment.TimeOfDay</td>
-                <td>@shift.Members.Name</td>
-                <td><a asp-controller="GenerateSchedule" asp-action="Edit" asp-route-id="@shift.ID" id="edit" class="btn">Bewerken</a></td>
-                @*<td><input id="edit" class="btn" type="submit" value="Bewerk" name="Edit"></td>*@
-                <td><a asp-controller="GenerateSchedule" asp-action="Delete" asp-route-id="@shift.ID" id="edit" class="btn">Verwijderen</a></td>
-                @*<td><a id="edit" asp-route-id="@shift.ID" class="btn" value="Verwijder" name="Delete" formmethod="delete"></td>*@
 
-                <!--
-    <th></th>
-    <td>27-5-2020</td>
-    <td>10:00</td>
-    <td>11:00</td>
-    <td></td>
-    <td><input id="edit" class="btn" type="submit" value="Bewerk"></td>
-    <td><input id="edit" class="btn" type="submit" value="Verwijder"></td>
-    -->
-            </tr>
-            }
-            </tbody>
-    </table>
+    <div class="col-3">
+        help
+    
+    
+    
+    </div>
+
 </div>

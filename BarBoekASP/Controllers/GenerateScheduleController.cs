@@ -55,36 +55,23 @@ namespace BarBoekASP.Controllers
         }
 
         [HttpPost]
-        public IActionResult GenerateSchedule(string month)
+        public IActionResult GenerateSchedule(string month, string VoorkeurLeden)
         {
             List<MemberDTO> members = memberRetRepository.GetAll();
 
             ShiftViewModel shiftViewModel = new ShiftViewModel();
 
             List<ShiftDTO> membershifts = shiftRetRepository.GetAllShiftsForClub(month);
-           /* 
-            if (membershifts[0].Members.ID != 0)
-            {
-                foreach (ShiftDTO shift in membershifts)
-                {
-                    ShiftDetailViewModel model = new ShiftDetailViewModel();
+         
+            //check de checkboxes
 
-                    model.EndMoment = shift.EndMoment;
-                    model.StartMoment = shift.StartMoment;
-                    model.Members = shift.Members;
-                    model.ID = shift.ID;
 
-                    shiftViewModel.Shifts.Add(model);
-                }
-            }
-            */
-           // else if (membershifts[0].Members.ID == 0)
-          //  {
                 foreach (ShiftDTO shift in membershifts)
                 {
                     scheduleSaveRepository.Shifts.Add(shift);
                     
-                    scheduleSaveRepository.PlanShifts(members);
+
+                    scheduleSaveRepository.PlanShifts(members, VoorkeurLeden);
                 }
 
                 foreach (ShiftDTO shiftmember in scheduleSaveRepository.Shifts)
@@ -99,7 +86,7 @@ namespace BarBoekASP.Controllers
 
                     shiftViewModel.Shifts.Add(model);
                 }
-            //}
+            
 
             return View(shiftViewModel);
         }

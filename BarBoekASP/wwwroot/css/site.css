@@ -45,6 +45,7 @@ li {
 }
 
 .ais {
+    display: flex;
     align-items: center;
 }
 
@@ -95,7 +96,7 @@ section {
 
 .select p {
     display: flex;
-    align-items: center;;
+    align-items: center;
 }
 
 /*                */
@@ -405,54 +406,21 @@ h1 {
     color: #666666;
 }
 
-
-#listlegend li {
-    font-size: 14px;
+#listlegend{
+   
+}
+#listlegend label {
+    font-size: 12px;
     background: lightgray;
-    margin-top: 10px;
+  
+}
+#formhead{
+    font-size: 12px;
 }
 
-#blockcolorred::before {
-    background: white;
-    content: "■";
-    color: red;
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
-}
-
-#blockcolorgreen::before {
-    background: white;
-    content: "■";
-    color: green;
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
-}
-
-#blockcolorpurple::before {
-    background: white;
-    content: "■";
-    color: purple;
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
-}
-
-#blockcolorblue::before {
-    background: white;
-    content: "■";
-    color: blue;
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
-}
 
 #edit {
     background-color: rgb(54, 215, 243);
 }
+
 /*---------------------------------------------------------------------------------------------------------*/
