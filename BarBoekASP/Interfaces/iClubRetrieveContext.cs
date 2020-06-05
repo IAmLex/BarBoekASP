@@ -14,5 +14,6 @@ namespace BarBoekASP.Interfaces
         bool Inloggen(ClubModel club);
         bool CheckValidate(ClubModel club);
         List<ClubModel> GetAll();
+        void FindAddressBy(ClubModel club);
     }
 }

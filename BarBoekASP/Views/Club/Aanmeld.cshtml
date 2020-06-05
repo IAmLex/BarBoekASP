@@ -4,13 +4,12 @@
     ViewData["Title"] = "Club";
 }
 
-<h2>Club</h2>
+<h2>Vereniging Registreren</h2>
 
 @using (Html.BeginForm(actionName: "Aanmeld", controllerName: "Club", FormMethod.Post))
 {
-    <div style="column-width:25em;">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <form asp-action="Aanmeld">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
@@ -48,16 +47,13 @@
                         <input asp-for="Addition" class="form-control" />
                         <span asp-validation-for="Addition" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="ZipCode" class="control-label"></label>
-                        <input asp-for="ZipCode" class="form-control" />
-                        <span asp-validation-for="ZipCode" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-10">
-                        Demo
+                    <div class="form-inline">
+                        <label asp-for="Type" class="control-label">Demo</label>
                         @Html.RadioButtonFor(model => model.Type, "Demo")
-                        Jaarabonnemnet
-                        @Html.RadioButtonFor(model => model.Type, "Jaarabonnemnet")
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                        <label asp-for="Type" class="control-label">Jaarabonnement</label>
+                        @Html.RadioButtonFor(model => model.Type, "Jaarabonnement")
+                        <span asp-validation-for="Type" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Comment" class="control-label"></label>
@@ -69,7 +65,6 @@
                     </div>
                 </form>
             </div>
-        </div>
     </div>
 }
 

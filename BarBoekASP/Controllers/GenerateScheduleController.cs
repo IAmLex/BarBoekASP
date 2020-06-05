@@ -7,9 +7,7 @@ using BarBoekASP.Data.Repositories;
 using BarBoekASP.Interfaces;
 using BarBoekASP.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
-using Org.BouncyCastle.Crypto.Tls;
 
 namespace BarBoekASP.Controllers
 {
@@ -24,6 +22,7 @@ namespace BarBoekASP.Controllers
         ShiftRetRepository shiftRetRepository;
         iMemberRetrieveContext _iMemberRetrieveContext;
         MemberRetRepository memberRetRepository;
+
 
         public GenerateScheduleController(IConfiguration configuration)
         {
@@ -50,7 +49,6 @@ namespace BarBoekASP.Controllers
         [HttpGet]
         public IActionResult GenerateSchedule()
         {
-           
             return View(new ShiftViewModel());
         }
 
@@ -62,44 +60,37 @@ namespace BarBoekASP.Controllers
             ShiftViewModel shiftViewModel = new ShiftViewModel();
 
             List<ShiftDTO> membershifts = shiftRetRepository.GetAllShiftsForClub(month);
-         
-            //check de checkboxes
 
+            foreach (ShiftDTO shift in membershifts)
+            {
+                scheduleSaveRepository.Shifts.Add(shift);
 
-                foreach (ShiftDTO shift in membershifts)
-                {
-                    scheduleSaveRepository.Shifts.Add(shift);
-                    
+                scheduleSaveRepository.PlanShifts(members, VoorkeurLeden);
+            }
 
-                    scheduleSaveRepository.PlanShifts(members, VoorkeurLeden);
-                }
+            foreach (ShiftDTO shiftmember in scheduleSaveRepository.Shifts)
+            {
+                shiftSaveRepository.SaveLidShift(shiftmember);
+                ShiftDetailViewModel model = new ShiftDetailViewModel();
 
-                foreach (ShiftDTO shiftmember in scheduleSaveRepository.Shifts)
-                {
-                    //shiftSaveRepository.SaveLidShift(shiftmember);
-                    ShiftDetailViewModel model = new ShiftDetailViewModel();
+                model.EndMoment = shiftmember.EndMoment;
+                model.StartMoment = shiftmember.StartMoment;
+                model.Members = shiftmember.Members;
+                model.ID = shiftmember.ID;
 
-                    model.EndMoment = shiftmember.EndMoment;
-                    model.StartMoment = shiftmember.StartMoment;
-                    model.Members = shiftmember.Members;
-                    model.ID = shiftmember.ID;
-
-                    shiftViewModel.Shifts.Add(model);
-                }
-            
+                shiftViewModel.Shifts.Add(model);
+            }
 
             return View(shiftViewModel);
         }
-        
-        
-        public IActionResult Delete(int id)
+
+        [HttpDelete]
+        public IActionResult GenerateSchedule(int Delete)
         {
-            this.shiftSaveRepository.DeleteShift(id);
-            
-            //meassage delete
-            return View();
+
+            return View(new ShiftViewModel());
         }
-        
+
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -117,23 +108,10 @@ namespace BarBoekASP.Controllers
 
             return View(model);
         }
-        
+
         [HttpPost]
-        public IActionResult Edit(ShiftDetailViewModel Model)
+        public IActionResult Edit(ShiftViewModel shiftViewModel)
         {
-
-            ShiftDTO shift = new ShiftDTO()
-            {
-                ID = Model.ID,
-                Name = Model.Name,
-                StartMoment = Model.StartMoment,
-                EndMoment = Model.EndMoment,
-                EventType = Model.EventType,
-                MaxMemberCount = Model.MaxMemberCount,
-                Members = Model.Members
-            };
-            shiftSaveRepository.UpdateShift(shift);
-
             // Create dto from model
             // Save model to database
 

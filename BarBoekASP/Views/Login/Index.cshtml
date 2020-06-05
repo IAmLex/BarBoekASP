@@ -2,19 +2,25 @@
 @{
     ViewData["Title"] = "Login";
 }
+
 @using (Html.BeginForm(actionName: "Login", controllerName: "Login", FormMethod.Post))
 {
-
-    <form class="form-inline" asp-action="Login">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <label asp-for="ClubNumber" class="control-label">E-mail:</label>
-        <input asp-for="ClubNumber" class="form-control" />
-        <span asp-validation-for="ClubNumber" class="text-danger"></span>
-        <label asp-for="Postcode" class="control-label">Password:</label>
-        <input asp-for="Postcode" class="form-control" />
-        <span asp-validation-for="Postcode" class="text-danger"></span>
-        <label>
-            <input type="submit" value="Login" class="btn btn-default" />
-        </label>
-    </form>
+    <div class="row">
+        <form class="form-inline" asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-inline">
+                <label asp-for="ClubNumber" class="control-label">E-mail:</label>
+                <input asp-for="ClubNumber" class="form-control " />
+                <span asp-validation-for="ClubNumber" class="text-danger"></span>
+            </div>
+            <div class="form-inline">
+                <label asp-for="Postcode" class="control-label">Password:</label>
+                <input asp-for="Postcode" class="form-control" />
+                <span asp-validation-for="Postcode" class="text-danger"></span>
+            </div>
+            <div class="form-inline">
+                <input type="submit" value="Login" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
 }

@@ -10,16 +10,13 @@ namespace BarBoekASP.Data.Repositories
     public class ScheduleSaveRepository
     {
         iScheduleSaveContext SaveContext;
-        public List<ShiftDTO> Shifts { get; set;}// = new List<ShiftDTO>();
+        public List<ShiftDTO> Shifts { get; set; }// = new List<ShiftDTO>();
 
         public ScheduleSaveRepository(iScheduleSaveContext saveContext)
         {
             SaveContext = saveContext;
             this.Shifts = new List<ShiftDTO>();
         }
-
-
-
 
         public bool AddShift(ShiftDTO newShift)
         {
@@ -55,8 +52,6 @@ namespace BarBoekASP.Data.Repositories
 
         public void PlanShifts(List<MemberDTO> members, string radiocheck)
         {
-           
-
             // TODO: Add stuffs
             for (int i = 0; i < this.Shifts.Count; i++)
             {
@@ -66,11 +61,11 @@ namespace BarBoekASP.Data.Repositories
                         //met voorkeur zonder gedraaide dienst
                         if (Shifts[i].Members.ID == 0)
                         {
-                            
+
                             this.Shifts[i].Members = members[i];
                             SaveLidShift(Shifts[i]);
                         }
-                    break;
+                        break;
                     case "radio2":
                         //zonder voorkeur en zonder gedraaide dienst
                         break;
@@ -81,20 +76,7 @@ namespace BarBoekASP.Data.Repositories
                         //al bardienst gedaan zonder voorkeur, rekening houdend met verhindering
                         break;
                 }
-               
-               
-                
             }
-            
-
-           
-
         }
-
-        public void SaveLidShift(ShiftDTO shift)
-        {
-            SaveContext.InsertLidShift(shift);
-        }
-
     }
 }
