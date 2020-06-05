@@ -4,10 +4,16 @@
     ViewData["Title"] = "Confirm";
 }
 
-<h2>Confirm</h2>
+<h2>Gebruiker bevestigen</h2>
 
 @using (Html.BeginForm(actionName: "Confirm", controllerName: "Login", FormMethod.Post))
 {
+    @if (TempData["Success"] != null)
+    {
+        <div class="green">
+            <p><strong>Success:</strong> @TempData["Success"].ToString()</p>
+        </div>
+    }
     <div class="row">
         <div class="col-md-4">
             <form asp-action="Confirm">
@@ -28,16 +34,12 @@
                     <span asp-validation-for="HerhaalPassword" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Account aanmaken" class="btn btn-default" />
                 </div>
             </form>
         </div>
     </div>
 }
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -8,64 +8,71 @@
 
 @using (Html.BeginForm(actionName: "Aanmeld", controllerName: "Club", FormMethod.Post))
 {
-        <div class="row">
-            <div class="col-md-6">
-                <form asp-action="Aanmeld">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ClubNumber" class="control-label"></label>
-                        <input asp-for="ClubNumber" class="form-control" />
-                        <span asp-validation-for="ClubNumber" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Postcode" class="control-label"></label>
-                        <input asp-for="Postcode" class="form-control" />
-                        <span asp-validation-for="Postcode" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Street" class="control-label"></label>
-                        <input asp-for="Street" class="form-control" />
-                        <span asp-validation-for="Street" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Number" class="control-label"></label>
-                        <input asp-for="Number" class="form-control" />
-                        <span asp-validation-for="Number" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Addition" class="control-label"></label>
-                        <input asp-for="Addition" class="form-control" />
-                        <span asp-validation-for="Addition" class="text-danger"></span>
-                    </div>
-                    <div class="form-inline">
-                        <label asp-for="Type" class="control-label">Demo</label>
-                        @Html.RadioButtonFor(model => model.Type, "Demo")
-                        <span asp-validation-for="Type" class="text-danger"></span>
-                        <label asp-for="Type" class="control-label">Jaarabonnement</label>
-                        @Html.RadioButtonFor(model => model.Type, "Jaarabonnement")
-                        <span asp-validation-for="Type" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Comment" class="control-label"></label>
-                        <textarea asp-for="Comment" class="form-control" rows="3" cols="20"></textarea>
-                        <span asp-validation-for="Comment" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-default" />
-                    </div>
-                </form>
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="Aanmeld">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="ClubNumber" class="control-label"></label>
+                <input asp-for="ClubNumber" class="form-control" />
+                <span asp-validation-for="ClubNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Postcode" class="control-label"></label>
+                <input asp-for="Postcode" class="form-control" />
+                <span asp-validation-for="Postcode" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Street" class="control-label"></label>
+                <input asp-for="Street" class="form-control" />
+                <span asp-validation-for="Street" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Number" class="control-label"></label>
+                <input asp-for="Number" class="form-control" />
+                <span asp-validation-for="Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Addition" class="control-label"></label>
+                <input asp-for="Addition" class="form-control" />
+                <span asp-validation-for="Addition" class="text-danger"></span>
+            </div>
+        </form>
     </div>
+    <div class="col-md-4">
+        <form asp-action="Aanmeld">     
+            <label>Aanmeld voor:</label>
+            <div class="form-inline">           
+                @Html.RadioButtonFor(model => model.Type, "Demo")
+                <label asp-for="Type" class="control-label">Demo</label>
+                <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+            <div class="form-inline">         
+                @Html.RadioButtonFor(model => model.Type, "Jaarabonnement")
+                <label asp-for="Type" class="control-label">Jaarabonnement(à € 175,-excl BTW)</label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Comment" class="control-label"></label>
+                <textarea asp-for="Comment" class="form-control" rows="3" cols="20"></textarea>
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+        </form>
+        <div class="form-group">
+            <input type="submit" value="Registreren" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 @section Scripts {

@@ -101,7 +101,7 @@ section {
     display: inline-block;
     padding: 6px 15px;
     color: #ffffff;
-    background-color: #96c1e8;
+    background-color: #acacac;
     border: 0;
     border-radius: 4px;
     font-size: 15px;
@@ -110,8 +110,9 @@ section {
 }
 
     .btn:hover {
+        color: white;
         cursor: pointer;
-        background-color: #d5e6f6;
+        background-color: #c4c4c4;
     }
 
 a.btn:hover {
@@ -166,7 +167,7 @@ header li, header h1 {
 } */
 
     header h1 {
-        padding-right: 25px;
+        padding-right: 50px;
     }
 
     header li {
@@ -375,14 +376,10 @@ h1 {
     color: #666666;
 }
 
-#listlegend{
-   
-}
 #listlegend label {
     font-size: 12px;
-    background: lightgray;
-  
 }
+
 #formhead{
     font-size: 12px;
 }
@@ -460,11 +457,7 @@ h1 {
     text-align: center;
 }
 
-.NavigatieItem {
-    padding: 5%;
-    margin-top: 2%;
-    background-color: grey;
-    border-radius: 15px;
-    color: white;
-    margin: 10px;
+.sidenav a {
+    width: 100%;
+    margin-bottom: 15px;
 }
