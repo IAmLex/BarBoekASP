@@ -61,11 +61,12 @@ namespace BarBoekASP.Controllers
             if (retcontext.CheckValidate(user) == false)
             {
                 context.InsertUser(user);
-                return View("Index");
+                TempData["Success"] = "U heeft een account aangemaakt.";
+                return View("Confirm");
             }
             else
             {
-                ModelState.AddModelError("Email", "User with this email already exists");
+                ModelState.AddModelError("UEmail", "Deze email bestaat al.");
                 return View("Confirm");
             }
 
