@@ -10,16 +10,13 @@ namespace BarBoekASP.Data.Repositories
     public class ScheduleSaveRepository
     {
         iScheduleSaveContext SaveContext;
-        public List<ShiftDTO> Shifts { get; set;}// = new List<ShiftDTO>();
+        public List<ShiftDTO> Shifts { get; set; }// = new List<ShiftDTO>();
 
         public ScheduleSaveRepository(iScheduleSaveContext saveContext)
         {
             SaveContext = saveContext;
             this.Shifts = new List<ShiftDTO>();
         }
-
-
-
 
         public bool AddShift(ShiftDTO newShift)
         {
@@ -53,33 +50,39 @@ namespace BarBoekASP.Data.Repositories
             return add;
         }
 
-        public void PlanShifts(List<MemberDTO> members)
+        public void PlanShifts(List<MemberDTO> members, string radiocheck)
         {
-            //int count = 0;
-
             // TODO: Add stuffs
             for (int i = 0; i < this.Shifts.Count; i++)
             {
-                this.Shifts[i].Members = members[i];
+                switch (radiocheck)
+                {
+                    case "radio1":
+                        //met voorkeur zonder gedraaide dienst
+                        if (Shifts[i].Members.ID == 0)
+                        {
+
+                            this.Shifts[i].Members = members[i];
+                            SaveLidShift(Shifts[i]);
+                        }
+                        break;
+                    case "radio2":
+                        //zonder voorkeur en zonder gedraaide dienst
+                        break;
+                    case "radio3":
+                        //al bardienst gedaan, rekening houdend met voorkeur /verhindering 
+                        break;
+                    case "radio4":
+                        //al bardienst gedaan zonder voorkeur, rekening houdend met verhindering
+                        break;
+                }
             }
-
-            //foreach(ShiftDTO shift in this.Shifts)
-            //{
-            //    foreach(MemberDTO member in members)
-            //    {
-            //       //if (AddShift(shift))
-            //        //{
-                        
-            //            this.Shifts[count].Members = member;
-            //            break;
-            //        //}
-            //    }
-            //    count++;
-            //}
-           
         }
-        
-
-
+        public void SaveLidShift(ShiftDTO shift)
+        {
+            SaveContext.InsertLidShift(shift);
+        }
     }
+
+   
 }

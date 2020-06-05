@@ -44,6 +44,7 @@ li {
 }
 
 .ais {
+    display: flex;
     align-items: center;
 }
 
@@ -90,7 +91,6 @@ section {
     .select p {
         display: flex;
         align-items: center;
-        ;
     }
 
 /*                */
@@ -330,7 +330,6 @@ input[type=checkbox] {
         margin: auto;
         width: fit-content;
         max-width: 1000px;
-        ;
         background: #fff;
         border-radius: 15px;
     }
@@ -376,59 +375,25 @@ h1 {
     color: #666666;
 }
 
-
-#listlegend li {
-    font-size: 14px;
+#listlegend{
+   
+}
+#listlegend label {
+    font-size: 12px;
     background: lightgray;
-    margin-top: 10px;
+  
 }
-
-#blockcolorred::before {
-    background: white;
-    content: "■";
-    color: red;
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
-}
-
-#blockcolorgreen::before {
-    background: white;
-    content: "■";
-    color: green;
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
-}
-
-#blockcolorpurple::before {
-    background: white;
-    content: "■";
-    color: purple;
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
-}
-
-#blockcolorblue::before {
-    background: white;
-    content: "■";
-    color: blue;
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
+#formhead{
+    font-size: 12px;
 }
 
 #edit {
     background-color: rgb(54, 215, 243);
 }
 /*---------------------------------------------------------------------------------------------------------*/
+/*Generate Report page css---------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------*/
 
-/*Generate Report page css-------------------------------------------------------------------------------*/
 .itemsRow {
     display: flex;
     background-color: blue; /*REMOVE LATER*/
@@ -490,4 +455,16 @@ h1 {
 .generateReporFullBodyDivHelpCol {
     background-color: red; /*REMOVE LATER*/
 }
-/*---------------------------------------------------------------------------------------------------------*/
+
+.items {
+    text-align: center;
+}
+
+.NavigatieItem {
+    padding: 5%;
+    margin-top: 2%;
+    background-color: grey;
+    border-radius: 15px;
+    color: white;
+    margin: 10px;
+}

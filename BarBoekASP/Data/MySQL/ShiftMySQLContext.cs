@@ -83,16 +83,7 @@ namespace BarBoekASP.Data.MySQL
 
             ExecuteQuery(sql, parameters);
         }
-        public void InsertLidShift(ShiftDTO shift)
-        {
-            string sql = "INSERT INTO `lid-dienst-combo` (lidID, dienstID) VALUES(@lidid, @dienstid);";
-            List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
-            parameters.Add(new KeyValuePair<string, string>("lidid", shift.Members.ID.ToString()));
-            parameters.Add(new KeyValuePair<string, string>("dienstid", shift.ID.ToString()));
-           
-
-            ExecuteQuery(sql, parameters);
-        }
+        
 
        
         public List<ShiftDTO> GetAllShiftsForClub(string month)

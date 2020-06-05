@@ -12,7 +12,7 @@ namespace BarBoekASP.Interfaces
         void DeleteShift(int id);
         void UpdateShift(ShiftDTO shift);
 
-        void InsertLidShift(ShiftDTO shift);
+        
         //Save(Shift s);
         // ¯\_(ツ)_/¯ Do something 
         // Save(shift:ShiftDTO)
