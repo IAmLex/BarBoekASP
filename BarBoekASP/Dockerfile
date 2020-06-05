@@ -1,22 +1,19 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+FROM microsoft/aspnetcore-build AS builder
+ WORKDIR /source
+ EXPOSE 80
+ EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.1-buster-slim AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+ # caches restore result by copying csproj file separately
+ COPY *.csproj .
+ RUN dotnet restore
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
-WORKDIR /src
-COPY ["BarBoekASP/BarBoekASP.csproj", "BarBoekASP/"]
-RUN dotnet restore "mail/BarBoekASP.csproj"
-COPY . .
-WORKDIR "/src/BarBoekASP"
-RUN dotnet build "BarBoekASP.csproj" -c Release -o /app/build
+ # copies the rest of your code
+ COPY ["BarBoekASP/BarBoekASP.csproj", "BarBoekASP/"]
+ RUN dotnet publish --output /app/ --configuration Release
 
-FROM build AS publish
-RUN dotnet publish "BarBoekASP.csproj" -c Release -o /app/publish
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "BarBoekASP.dll"]
+ # Stage 2
+ FROM microsoft/aspnetcore
+ WORKDIR /app
+ COPY --from=builder /app .
+ ENTRYPOINT ["dotnet", "BarBoekASP.dll"]
