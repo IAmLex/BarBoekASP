@@ -11,7 +11,7 @@
         <div class="col-lg-10 generateReporFullBodyDivItemsCol">
             <div class="row templateRow">
                 <div class="templateRowContent">
-                    <h2>xxxxx</h2>
+                    <h4>[INSERT DROPDOWN] Template kiezen</h4>
                 </div>
             </div>
 
@@ -96,8 +96,9 @@
                     </form>
 
                 </div>
-                <form method="post" asp-action="addSelectedColumns" asp-controller="GenerateReport">
-                    <div class="col selectColumns">
+                <div class="col selectColumns">
+                    <form method="post" asp-action="addSelectedColumns" asp-controller="GenerateReport">
+
                         <div class="checkboxlist">
 
                             @{
@@ -125,21 +126,23 @@
                             </div>
                         </div>
 
-                    </div>
-                </form>
-                <form method="post" asp-action="ExecuteConstructedQuery" asp-controller="GenerateReport">
-                    <div class="form-group">
-                        <div class="row sb">
-                            <input type="submit" value="Genereren" />
-                            @*<input type="submit" class="btn addColumnsButton" onsubmit="addColumn()" />*@
+
+                    </form>
+
+                    <form method="post" asp-action="ExecuteConstructedQuery" asp-controller="GenerateReport">
+                        <div class="form-group">
+                            <div class="row sb">
+                                <input type="submit" value="Genereren" />
+                                @*<input type="submit" class="btn addColumnsButton" onsubmit="addColumn()" />*@
+                            </div>
                         </div>
-                    </div>
-                </form>
-                
+                    </form>
+                </div>
             </div>
         </div>
         <div class="col generateReporFullBodyDivHelpCol">
-            <h2>xxx</h2>
+            <h4>Help</h4>
+            <p>LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUMLOREM IPSUM</p>
         </div>
     </div>
 

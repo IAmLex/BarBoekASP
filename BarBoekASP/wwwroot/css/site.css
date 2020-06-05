@@ -40,7 +40,7 @@ li {
 }
 
 .sb {
-    justify-content: space-between;
+    justify-content: space-between!important;
 }
 
 .ais {
@@ -411,7 +411,13 @@ h1 {
     margin-right: 0px;
     margin-left: 0px;
     display: grid;
-    background-color: green; /*REMOVE LATER*/
+    
+}
+
+.templateRowContent {
+    background-color: lightblue;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .checkboxlist {
@@ -448,7 +454,7 @@ h1 {
 }
 
 .col.selectColumns {
-    margin-top:20%;
+    margin-top:3%;
 }
 
 
@@ -467,7 +473,8 @@ h1 {
 }
 
 .generateReporFullBodyDivHelpCol {
-    background-color: red; /*REMOVE LATER*/
+    background-color: lightblue;
+    border-radius:20px;
 }
 
 .items {
