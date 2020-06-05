@@ -31,6 +31,7 @@ namespace BarBoekASP.Logic.Club
         public string Postcode { get; set; }
         [Required(ErrorMessage = "Selecteer een type.")]
         public Typetype Type { get; set; }
+        [Display(Name = "Opmerking")]
         public string Comment { get; set; }
         public string Test { get; set; }
     }
