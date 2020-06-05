@@ -57,9 +57,9 @@ namespace BarBoekASP.Data.MySQL
             string sql = "INSERT INTO dienst (naam,startMoment,eindMoment,soort,maxLeden) VALUES(@name,@sMom,@eMom,@type,@maxMem);";
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
             parameters.Add(new KeyValuePair<string, string>("name", shift.Name.ToString()));
-            parameters.Add(new KeyValuePair<string, string>("sMom", shift.StartMoment.ToString()));
-            parameters.Add(new KeyValuePair<string, string>("eMom", shift.EndMoment.ToString()));
-            parameters.Add(new KeyValuePair<string, string>("type", shift.EventType.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("sMom", shift.StartMoment.ToString("yyyy-MM-dd hh:mm:ss")));
+            parameters.Add(new KeyValuePair<string, string>("eMom", shift.EndMoment.ToString("yyyy-MM-dd hh:mm:ss")));
+            parameters.Add(new KeyValuePair<string, string>("type", ((int)shift.EventType).ToString()));
             parameters.Add(new KeyValuePair<string, string>("maxMem", shift.MaxMemberCount.ToString()));
             DataSet result = ExecuteQuery(sql, parameters);
         }
