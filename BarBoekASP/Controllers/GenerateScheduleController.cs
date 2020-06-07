@@ -7,6 +7,7 @@ using BarBoekASP.Data.Repositories;
 using BarBoekASP.Interfaces;
 using BarBoekASP.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 
 namespace BarBoekASP.Controllers
@@ -109,8 +110,20 @@ namespace BarBoekASP.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(ShiftViewModel shiftViewModel)
+        public IActionResult Edit(ShiftDetailViewModel Model)
         {
+            ShiftDTO shift = new ShiftDTO()
+            {
+                ID = Model.ID,
+                Name = Model.Name,
+                StartMoment = Model.StartMoment,
+                EndMoment = Model.EndMoment,
+                EventType = Model.EventType,
+                MaxMemberCount = Model.MaxMemberCount,
+                Members = Model.Members
+            };
+
+            shiftSaveRepository.UpdateShift(shift);
             // Create dto from model
             // Save model to database
 
