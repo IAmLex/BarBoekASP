@@ -74,12 +74,12 @@ namespace BarBoekASP.Data.MySQL
         }
         public void UpdateShift(ShiftDTO shift)
         {
-            string sql = "update dienst set StartMoment=@startmoment EindMoment=@eindmoment Soort=@soort where ID=@id ";
+            string sql = "update dienst set StartMoment=@startmoment, EindMoment=@eindmoment, Soort=@soort where ID=@id ";
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
             parameters.Add(new KeyValuePair<string, string>("id", shift.ID.ToString()));
-            parameters.Add(new KeyValuePair<string, string>("startmoment", shift.StartMoment.ToString()));
-            parameters.Add(new KeyValuePair<string, string>("eindmoment", shift.EndMoment.ToString()));
-            parameters.Add(new KeyValuePair<string, string>("soort", shift.EventType.ToString()));
+            parameters.Add(new KeyValuePair<string, string>("startmoment", shift.StartMoment.ToString("yyyy-MM-dd hh:mm:ss")));
+            parameters.Add(new KeyValuePair<string, string>("eindmoment", shift.EndMoment.ToString("yyyy-MM-dd hh:mm:ss")));
+            parameters.Add(new KeyValuePair<string, string>("soort", ((int)shift.EventType).ToString()));
 
             ExecuteQuery(sql, parameters);
         }
