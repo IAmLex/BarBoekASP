@@ -52,9 +52,11 @@ namespace BarBoekASP.Data.Repositories
 
         public void PlanShifts(List<MemberDTO> members, string radiocheck)
         {
+            Random rnd = new Random();
             // TODO: Add stuffs
             for (int i = 0; i < this.Shifts.Count; i++)
             {
+                int m = rnd.Next(0, members.Count);
                 switch (radiocheck)
                 {
                     case "radio1":
@@ -62,7 +64,7 @@ namespace BarBoekASP.Data.Repositories
                         if (Shifts[i].Members.ID == 0)
                         {
 
-                            this.Shifts[i].Members = members[i];
+                            this.Shifts[i].Members = members[m];
                             SaveLidShift(Shifts[i]);
                         }
                         break;
