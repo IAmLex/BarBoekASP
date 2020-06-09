@@ -66,7 +66,7 @@ namespace BarBoekASP.Data.MySQL
 
         public void DeleteShift(int id)
         {
-            string sql = "delete from dienst where ID=@id";
+            string sql = "delete from dienst where ID=@id; DELETE FROM `lid-dienst-combo` WHERE dienstID=@id";
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
             parameters.Add(new KeyValuePair<string, string>("id", id.ToString()));
 
