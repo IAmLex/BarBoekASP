@@ -157,19 +157,6 @@
 
             <div class="item" style="width: 30%;">
                 <div class="form-group">
-                    <label>Land</label>
-                    <select asp-for="Land">
-                        @{ c = 'A'; }
-                        @foreach (string column in Model.Columns) {
-                            <option value="@c">@column</option>
-                            c++;
-                        }
-                    </select>
-                </div>
-            </div>
-
-            <div class="item" style="width: 30%;">
-                <div class="form-group">
                     <label>Telefoon</label>
                     <select asp-for="Telefoon">
                         @{ c = 'A'; }
@@ -245,6 +232,8 @@
                     </select>
                 </div>
             </div>
+
+            <div style="width:30%;"></div>
         </div>
     </div>
     <div class="form-group">
