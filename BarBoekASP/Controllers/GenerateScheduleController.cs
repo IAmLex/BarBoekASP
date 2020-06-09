@@ -85,9 +85,9 @@ namespace BarBoekASP.Controllers
         }
 
        
-        public IActionResult Delete(int Delete)
+        public IActionResult Delete(int id)
         {
-
+            this.shiftSaveRepository.DeleteShift(id);
             return View();
         }
 
