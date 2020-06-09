@@ -117,7 +117,12 @@ namespace BarBoekASP.Data.MySQL
 
             List<KeyValuePair<string, string>> parameters = new List<KeyValuePair<string, string>>();
             parameters.Add(new KeyValuePair<string, string>("clubID", clubId.ToString()));
+            
+            ExecuteQuery(query, parameters);
 
+            // Delete all lid dienst combo
+            parameters.Clear();
+            query = "DELETE FROM `lid-dienst-combo`";
             ExecuteQuery(query, parameters);
 
             // TODO: Remove members from these columns aswell

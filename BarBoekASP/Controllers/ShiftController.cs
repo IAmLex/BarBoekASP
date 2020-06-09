@@ -43,7 +43,7 @@ namespace BarBoekASP.Controllers
         {
             shiftSaveRepository.SaveShift(shiftCreateViewModel.newModel);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Dashboard");
         }
     }
 }
